@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap");
+    </style>
+
+    <style type="text/tailwindcss">
+      @theme {
+        /* define a new font-family */
+        --font-cursive: "Cedarville Cursive";
+        --color-primary: #da373d;
+        /* custom spacing applies to m- p- gap- space-x-, etc */
+        --spacing-box: 17px;
+      }
+
+      @layer components {
+        .list-item {
+          @apply p-2 text-white font-bold hover:bg-orange-700 hover:text-black cursor-pointer;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-orange-200 sm:max-md:bg-white">
+    <header class="font-cursive">
+      <nav>
+        <!-- <ul style="background-color: aqua; margin: 32px"> -->
+        <ul class="bg-primary flex justify-around">
+          <li class="list-item">Home</li>
+          <li class="list-item">About</li>
+          <li class="list-item">Contact</li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="p-2 shadow-lg">
+      <h1 class="text-2xl font-bold">Tailwind CSS Framwork</h1>
+      <p class="m-box">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti, minus voluptatem cumque
+        eveniet excepturi ipsa veniam saepe ab hic eos.
+      </p>
+    </main>
+  </body>
+</html>
