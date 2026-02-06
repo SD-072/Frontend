@@ -85,26 +85,26 @@ fruits.splice(1, 2, "Mango"); // Output: ['Apple', 'Mango', 'Kiwi']
 
 const names2 = ["Samara", "Nil", "Patrick", "Martin"];
 
-// console.log(names2);
+console.log(names2);
 
 const joinedString = names2.join();
-// console.log(joinedString);
+console.log(joinedString);
 
-// console.log("Names of SD72: " + names2.join(", "));
+console.log("Names of SD72: " + names2.join(", "));
 
-// console.log(joinedString.toUpperCase());
+console.log(joinedString.toUpperCase());
 
 const string = "abcde";
-// console.log(string.toUpperCase());
-// console.log(string.split(""));
+console.log(string.toUpperCase());
+console.log(string.split(""));
 
 const stringWithDashes = "ab-cd-e";
 // console.log(stringWithDashes.split("-"));
 
 const sentence = "Hi, my name is Renke";
 const splitString = sentence.split(" ");
-// console.log(splitString);
-// console.log(splitString.join(" "));
+console.log(splitString);
+console.log(splitString.join(" "));
 
 // # LOOPS
 
