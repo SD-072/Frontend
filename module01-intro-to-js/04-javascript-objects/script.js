@@ -190,19 +190,19 @@ console.log(typeof new Date());
 
 // * Without destructuring — repetitive and verbose:
 {
-  const firstName = person.firstName;
+  const username = person.firstName;
   const age = person.age;
   const isStudent = person.isStudent;
+  const nationality = person.nationality || "Unkown nationality"; // * Default values kick in only when the property is undefined.
   const city = person.address.city;
   console.log(firstName, age, isStudent, city);
 }
 
-// * With destructuring — extract multiple properties in one statement.
 person.nationality = "German";
 
-// * Default values kick in only when the property is undefined.
+// * With destructuring — extract multiple properties in one statement.
 const {
-  firstName,
+  firstName: username,
   age,
   isStudent,
   nationality = "Unknown nationality",
