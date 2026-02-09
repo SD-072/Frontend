@@ -23,6 +23,25 @@ const shortAddArrowFunc = (num1, num2) => (num1 + num2) * 2;
 
 // # Higher-Order-Functions
 // * 1. A function that accepts another function as an argument (the callback function)
+function higherOrderFunc(func) {
+  func(); // calling the function in here
+}
+
+// This is a callback function because it's passed into another function.
+function callbackFunction() {
+  console.log(`Hi, I'm a regular function!`);
+}
+
+higherOrderFunc(callbackFunction);
+// instead of running callbackFunction inside of higherOrderFunc, we can also directly pass an anonymous function:
+
+higherOrderFunc(function callbackFunction(number) {
+  console.log(`Hi, I'm a regular function TWO`, number);
+}, 10);
+
+higherOrderFunc(() => console.log(`Hi, I'm a regular function THREE`));
+
+// * Passing arguments down to the callbackFunc
 function higherOrderFunc(func, ...args) {
   return func(...args); // call the callback and forward any arguments
 }
@@ -40,12 +59,6 @@ higherOrderFunc(callbackFunction, 5);
 
 // Option B: wrap the call in another function (closure)
 higherOrderFunc(() => callbackFunction(5));
-
-higherOrderFunc(function callbackFunction(number) {
-  console.log(`Hi, I'm a regular function TWO`, number);
-}, 10);
-
-higherOrderFunc(() => console.log(`Hi, I'm a regular function THREE`));
 
 // * 2. A function that returns another function
 function multiplier(factor) {
