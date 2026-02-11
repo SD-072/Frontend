@@ -1,4 +1,5 @@
-// # DOM API Fundamentals
+// # Learning Concept: DOM Selection, Mutation, Events, and Form Handling
+// * Why this matters: The DOM API lets JavaScript move from static markup to interactive UI behavior.
 console.log(document);
 
 const subheading = document.getElementById("sub-heading");
@@ -51,7 +52,7 @@ const createPara = (text) => {
   newPara.setAttribute("class", "para");
   // newPara.classList.add("para");
 
-  paraContainer.prepend(newPara);
+  // paraContainer.prepend(newPara)
   paraContainer.appendChild(newPara);
 };
 
@@ -79,7 +80,6 @@ createPara("JS created this para again");
 }
 
 // # Event Listeners
-// document.getElementById("change-color-btn");
 const changeColorBtn = document.querySelector("#change-color-btn");
 
 const onClick = () => {
@@ -90,3 +90,44 @@ const onClick = () => {
 };
 
 changeColorBtn.addEventListener("click", onClick);
+
+// # FORMS
+const form = document.querySelector("form");
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  console.log("form first input value:", event.target[0].value);
+  console.log("form named control value:", event.target["new-paragraph"].value);
+  const newParagraph = event.target["new-paragraph"].value.trim();
+
+  // Multiple validation checks
+  if (!newParagraph) {
+    alert("Please enter a text");
+    return;
+  }
+
+  if (newParagraph.length < 3) {
+    alert("Text must be at least 3 characters long");
+    return;
+  }
+
+  if (newParagraph.length > 100) {
+    alert("Text must be less than 100 characters");
+    return;
+  }
+
+  // Security: Basic XSS prevention check
+  if (newParagraph.includes("<script>")) {
+    alert("Invalid input detected");
+    return;
+  }
+
+  createPara(newParagraph);
+
+  event.target.reset();
+});
+
+window.addEventListener("load", (loadEvent) => {
+  console.log(loadEvent);
+  console.log("Page has been loaded (event object demo)");
+});
