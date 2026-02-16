@@ -1,36 +1,34 @@
-// const heading = document.querySelector(".p-4");
-
+// const heading = document.getElementsByTagName("h1");
 // const heading = document.getElementsByClassName("p-4");
-
-const button = document.querySelector("button");
-
 const heading = document.querySelectorAll(".p-4");
 
 // heading[0].setAttribute("class", "bg-red-500");
-
 heading[0].classList.add("m-4");
-
 heading[0].classList.remove("p-4");
-
-heading[0].classList.toggle("bg-red-300");
-
-heading[0].classList.toggle("bg-red-300");
+heading[0].classList.toggle("bg-red-400");
+heading[0].classList.toggle("bg-red-400");
 
 console.log(heading);
 
+// for loop
+// for of loop
 for (const singleHeading of heading) {
-  if (singleHeading.textContent !== "This is a heading two") {
+  if (singleHeading.textContent !== "This is heading two") {
     continue;
   }
-  console.log(singleHeading.textContent);
-  singleHeading.classList.add("text-green-600");
+  console.log(singleHeading.innerText);
 }
 
-// heading.forEach((singleHeading) => {
-//   console.log(singleHeading.textContent);
-//   singleHeading.classList.add("text-green-600");
-// });
+// forEach
+heading.forEach((singleHeading) => {
+  console.log(singleHeading.innerText);
+  singleHeading.classList.add("text-green-800");
+});
 
-button.addEventListener("click", () => {
+const btn = document.querySelector("button");
+btn.addEventListener("click", () => {
+  //   document.querySelector("body").setAttribute("class", "bg-red-500");
+  //   document.body.classList.toggle("bg-red-500");
   document.body.style.backgroundColor = "red";
+  console.error("Stop it");
 });
