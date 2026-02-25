@@ -11,7 +11,8 @@ const createLi = (task) => {
   newLi.className = "flex gap-4 items-baseline px-4 justify-between";
 
   newP.textContent = task.content;
-  deleteBtn.className = "mt-5 px-4 py-2 bg-red-500 hover:bg-red-500 text-white rounded";
+  deleteBtn.className =
+    "mt-5 px-4 py-2 bg-red-500 hover:bg-red-500 text-white rounded";
 
   deleteBtn.textContent = "Delete";
 
