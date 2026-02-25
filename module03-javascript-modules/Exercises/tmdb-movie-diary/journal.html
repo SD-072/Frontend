@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" class="h-full bg-gray-50">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Movie Diary — Journal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="min-h-full text-gray-900">
+    <!-- Navbar (FR008) -->
+    <header class="bg-white border-b">
+      <nav class="max-w-5xl mx-auto px-4 h-14 flex items-center gap-6">
+        <a href="index.html" class="hover:underline">Home</a>
+        <a href="journal.html" class="font-semibold">Journal</a>
+      </nav>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-6 space-y-4">
+      <h1 class="text-2xl font-bold">Your Favourites</h1>
+      <div id="journalGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      <p id="empty" class="text-gray-600">No favourites yet.</p>
+    </main>
+
+    <script type="module" src="js/journal.js"></script>
+  </body>
+</html>

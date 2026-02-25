@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pokédex Diary — Home</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script defer src="main.js" defer></script>
+  </head>
+  <body class="bg-slate-50 text-slate-900">
+    <!-- FR008: Navigation Bar - Navbar on both pages to switch between Homepage and Pokédex -->
+    <header class="bg-slate-900 text-white">
+      <nav class="mx-auto max-w-5xl flex items-center justify-between p-4">
+        <a href="index.html" class="font-semibold">Home</a>
+        <a href="pokedex.html" class="underline decoration-dashed">My Pokédex</a>
+      </nav>
+    </header>
+
+    <main class="mx-auto max-w-5xl p-4 space-y-6">
+      <section class="space-y-3">
+        <h1 class="text-2xl font-bold">Pokémon List</h1>
+
+        <!-- FR010: Search with Dialog - Search bar for Pokémon by name or ID -->
+        <form id="search-form" class="flex gap-2 items-center">
+          <input
+            id="search-input"
+            type="text"
+            placeholder="Search by name or ID…"
+            class="flex-1 rounded border border-slate-300 px-3 py-2"
+            aria-label="Search Pokémon by name or ID" />
+          <button class="rounded bg-blue-600 text-white px-3 py-2">Search</button>
+        </form>
+        <p class="text-sm text-slate-600">
+          Tip: Try names like “pikachu” or numeric IDs like “25”.
+        </p>
+      </section>
+
+      <!-- FR009: Fetch Pokémon List - Display list of Pokémon -->
+      <section id="list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></section>
+
+      <!-- FR010: Search with Dialog - Dialog for search results/feedback -->
+      <dialog id="result-dialog" class="rounded-lg p-0 backdrop:bg-black/40">
+        <div class="p-4 space-y-3">
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg font-semibold">Search Result</h2>
+            <button id="dialog-close" class="px-2 py-1 rounded bg-slate-200">Close</button>
+          </div>
+          <div id="dialog-content" class="space-y-3"></div>
+        </div>
+      </dialog>
+    </main>
+  </body>
+</html>
