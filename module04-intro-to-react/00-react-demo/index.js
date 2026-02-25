@@ -10,10 +10,10 @@
 // You write components in PascalCase
 const NavBar = () => {
   // Atop of the component is JavaScript
-  const navBarText = "Navigation Bar";
+  const navBarText = 'Navigation Bar';
 
   function displayText() {
-    return "Navigation Bar";
+    return 'Navigation Bar';
   }
 
   // At the bottom in a return statement is JSX (What you will see in the DOM/on the webapp)
@@ -24,7 +24,7 @@ const NavBar = () => {
         <li>{2 + 2}</li>
         <li>{navBarText}</li>
         <li>{displayText()}</li>
-        <li>{loggedIn ? "Hi" : "Please log in"}</li>
+        <li>{loggedIn ? 'Hi' : 'Please log in'}</li>
         {items.map(i => (
           <li>{i}</li>
         ))}
