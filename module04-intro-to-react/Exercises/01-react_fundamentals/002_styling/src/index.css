@@ -1,1 +1,14 @@
 /* Your CSS here */
+
+.hero__heading {
+  width: 10rem;
+  background-color: beige;
+  font-size: 3rem;
+  animation: pules 2000ms infinite linear;
+}
+
+@keyframes pules {
+  50% {
+    opacity: 0.5;
+  }
+}
