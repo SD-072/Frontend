@@ -1,21 +1,41 @@
+import Student from './components/Student';
 import './index.css';
 
 // You can work here or download the template
 const studentData = {
+  id: 1,
   firstName: 'Testy',
-  lastName: 'McTest',
+  lastName: 'McTestFace',
   age: 42,
   course: 'Web Development',
   city: 'Berlin',
   picture: 'https://randomuser.me/api/portraits/men/1.jpg',
-  gpa: 50,
-  graduate: false,
+  gpa: 82,
+  graduate: true,
 };
 
-// Your components go here
-
 const App = () => {
-  return <div>{/* Your UI goes here */}</div>;
+  // if (studentData.firstName !== 'Ruby') {
+  //   return null;
+  // }
+
+  // if (studentData.age === 42) {
+  //   return <p>Don't panic.</p>;
+  // }
+
+  return (
+    <div>
+      <Student person={studentData} />
+
+      {/* {studentData.age >= 18 ?
+        <p>Adult</p>
+      : <details>Strill a minor</details>}
+      {studentData.firstName === 'Test' && <h2>Hello, Test!</h2>} */}
+      {/* {false ?
+        <p>It is true</p>
+      : <details>It is false</details>} */}
+    </div>
+  );
 };
 
 export default App;
