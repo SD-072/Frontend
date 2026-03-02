@@ -1,5 +1,5 @@
 const FilterComponent = () => {
-  const setFilterInView = filter => {
+  const setFilterInView = (filter) => {
     // We'll refine this eventually
     console.log(filter);
   };
