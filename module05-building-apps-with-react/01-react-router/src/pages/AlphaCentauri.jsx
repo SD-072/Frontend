@@ -1,9 +1,15 @@
+// import { useEffect } from 'react';
+
 const AlphaCentauri = () => {
+  // useEffect(() => {
+  //   document.title = 'Alpha Centauri | Stars Gallery';
+  // }, []);
+
   return (
-    <div className='star'>
-      <div>
-        <img src='/alpha-centauri.jpeg' alt='Alpha Centauri, the closest Star System to us.' />
-      </div>
+    <section className='alpha-centauri-page'>
+      {/* title and other tags that belong in <head> can since React19 */}
+      {/* be written into a component. The useEffect above is no longer necessary */}
+      <title>Alpha Centauri | Stars Gallery</title>
       <h3 className='star__heading'>Alpha Centauri - A Stellar Marvel</h3>
       <p className='star__description'>
         Alpha Centauri stands as one of the most intriguing systems in our galactic neighborhood.
@@ -25,7 +31,7 @@ const AlphaCentauri = () => {
         on their formation, evolution, and potential orbital resonances. These findings will enhance
         our understanding of star formation processes and the overall dynamics of stellar systems.
       </p>
-    </div>
+    </section>
   );
 };
 

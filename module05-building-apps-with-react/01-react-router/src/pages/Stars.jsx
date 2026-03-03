@@ -1,24 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useOutletContext } from 'react-router';
 import Card from '../components/Card.jsx';
-import { starsLoader } from '../data/loaders.js';
 
 const Stars = () => {
-  const [stars, setStars] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await starsLoader();
-      console.log(data);
-      setStars(data);
-    };
-    fetchData();
-  }, []);
-
+  // useOutletContext gets data from parent layout (MainLayout) from the 'context' prop
+  const stars = useOutletContext();
   if (!stars) return <p className='message--loading'>Loading...</p>;
 
   return (
     <>
       <div className='grid'>
+        <title>Stars Gallery</title>
         {stars?.map((star) => (
           <Card star={star} key={star.id} />
         ))}

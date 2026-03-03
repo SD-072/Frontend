@@ -1,7 +1,10 @@
+import { Link, NavLink } from 'react-router';
+
 export default function Header() {
   return (
     <header className='header'>
-      <a href='/'>
+      {/* Anchor tags only for external links or navigation within a page */}
+      <Link to='/'>
         <h1>Webb Gallery</h1>
         <p>
           Fancy stars
@@ -9,18 +12,20 @@ export default function Header() {
             💫
           </span>
         </p>
-      </a>
+      </Link>
       <nav>
         <ul>
           <li>
-            <a className='navlink' href='/'>
+            {/* NavLink for client-side navigation with automatic "active" CSS class */}
+            <NavLink className='navlink' to='/'>
               Home
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a className='navlink' href='/'>
+            {/* NavLink prevents page reload and navigates via JavaScript */}
+            <NavLink className='navlink' to='/alpha-centauri'>
               Alpha Centauri
-            </a>
+            </NavLink>
           </li>
         </ul>
       </nav>

@@ -49,6 +49,45 @@ a {
   margin-inline: auto;
 }
 
+.alpha-centauri-page {
+  flex: 1;
+  padding: 3rem 2rem;
+  display: grid;
+  align-content: end;
+  gap: 1.25rem;
+  background-image: url('/alpha-centauri.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.single-star-page {
+  flex: 1;
+  padding: 3rem 2rem;
+  display: grid;
+  align-content: end;
+  gap: 1.25rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.single-star-content {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.single-star-page .star__heading {
+  font-size: 2rem;
+  background-color: color-mix(in oklch, currentColor 25%, hsla(240, 75%, 38%, 0.705));
+}
+
+.single-star-page .star__description {
+  max-width: 50ch;
+  font-size: 1.5rem;
+  background-color: color-mix(in oklch, currentColor 25%, hsla(240, 75%, 38%, 0.705));
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -143,6 +182,7 @@ a:has(.star) {
 
   & > div {
     width: 100%;
+    overflow: hidden;
   }
 }
 
@@ -170,65 +210,21 @@ a:has(.star) {
   }
 }
 
-/* single card after view transition */
-.star:not(:has(+ .star)):first-of-type,
-a:has(.star):not(:has(+ a .star)):first-of-type {
-  margin: 0 auto;
-  max-width: 100rem;
-  grid-template-rows: auto;
-  gap: 2rem;
-  background-color: transparent;
-  box-shadow: none;
-
-  & .star__img {
-    /* height: 50dvh;
-    overflow: hidden; */
-    /* grid-column: span 2; */
-    position: absolute;
-    inset: 0;
-  }
-  .star__heading {
-    font-size: 2rem;
-    font-weight: bold;
-    background-color: color-mix(in oklch, currentColor 25%, hsla(240, 75%, 38%, 0.705));
-  }
-  .star__description {
-    max-width: 50ch;
-    font-size: 1.5rem;
-    background-color: color-mix(in oklch, currentColor 25%, hsla(240, 75%, 38%, 0.705));
-  }
+a:has(.star) .star__heading,
+a:has(.star) .star__description {
+  transition: background-color 200ms;
 }
 
-main:has(.star:only-of-type) {
-  align-items: end;
-  position: relative;
-  min-height: 90dvh;
-  display: grid;
-}
-
-a,
-div:has(> div > .star__img) {
-  transition: all 200ms allow-discrete;
-
-  &:hover {
-    img {
-      overflow: visible;
-      transition: all 200ms allow-discrete;
-    }
-    h3,
-    p {
-      background-color: color-mix(in oklch, currentColor 25%, hsla(240, 75%, 38%, 0.705));
-      transition: all 200ms allow-discrete;
-    }
-  }
+a:has(.star):hover .star__heading,
+a:has(.star):hover .star__description {
+  background-color: color-mix(in oklch, currentColor 25%, hsla(240, 75%, 38%, 0.705));
 }
 
 .star__img {
   height: 100%;
   width: 100%;
-  object-fit: none;
-  transition: all 200ms;
-  overflow: hidden;
+  object-fit: cover;
+  object-position: center;
 }
 
 .star__heading,
