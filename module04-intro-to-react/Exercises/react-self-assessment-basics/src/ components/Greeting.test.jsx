@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { Greeting } from '.';
 
-const rendersSomething = Element => {
+const rendersSomething = (Element) => {
   const { container, unmount } = render(Element);
   return !!container.firstChild && (unmount(), true);
 };

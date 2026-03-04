@@ -1,15 +1,20 @@
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { UserList } from '.';
 
 const sampleUsers = [
   { id: 1, name: 'Ada Lovelace', picture: 'ada.png' },
-  { id: 2, name: 'Grace Hopper', picture: 'grace.png' }
+  { id: 2, name: 'Grace Hopper', picture: 'grace.png' },
 ];
 
-const rendersSomething = Element => {
+const rendersSomething = (Element) => {
   const { container, unmount } = render(Element);
-  return !!container.firstChild && (unmount(), true);
+  const hasRenderedContent = !!container.firstChild;
+  if (hasRenderedContent) {
+    unmount();
+    return true;
+  }
+  return false;
 };
 
 describe.runIf(rendersSomething(<UserList />))('UserList Component', () => {
