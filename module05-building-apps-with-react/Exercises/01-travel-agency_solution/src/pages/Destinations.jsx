@@ -13,8 +13,8 @@ const Destinations = () => {
         </p>
       </section>
       <section className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {destinations.map(({ title, image, description, slug }) => (
-          <DestinationCard key={slug} title={title} image={image} text={description} slug={slug} />
+        {destinations.map(({ title, image, text, slug }) => (
+          <DestinationCard key={slug} title={title} image={image} text={text} slug={slug} />
         ))}
       </section>
     </div>
