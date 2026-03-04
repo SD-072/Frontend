@@ -1,6 +1,12 @@
+import { useOutletContext, useParams } from 'react-router';
+
 const SingleDestination = () => {
-  // TODO: Add dynamic parameter
-  const slug = 'berlin';
+  const { slug } = useParams();
+
+  const destinations = useOutletContext();
+
+  // http://localhost:5173/destinations/berlin
+
   const destination = destinations.find((d) => d.slug === slug);
 
   if (!destination) {
@@ -21,7 +27,7 @@ const SingleDestination = () => {
         alt={destination.title}
         className='rounded-box h-80 w-full object-cover shadow-md'
       />
-      <p className='text-lg'>{destination.text}</p>
+      <p className='text-lg'>{destination.description}</p>
     </div>
   );
 };
