@@ -4,7 +4,13 @@ import { Counter } from '.';
 
 const rendersSomething = (Element) => {
   const { container, unmount } = render(Element);
-  return !!container.firstChild && (unmount(), true);
+
+  if (!container.firstChild) {
+    return false;
+  }
+
+  unmount();
+  return true;
 };
 
 describe.runIf(rendersSomething(<Counter />))('Counter Component', () => {
