@@ -1,9 +1,11 @@
 import { NavLink } from 'react-router';
 
+import { useBooking } from '../../contexts/BookingContext';
 import { useTheme } from '../../contexts/ThemeContextProvider';
 
 const NavBar = () => {
   const { theme, changeTheme } = useTheme();
+  const { bookingState } = useBooking();
 
   return (
     <div className='navbar bg-base-100 shadow-sm'>
@@ -22,6 +24,9 @@ const NavBar = () => {
           <option value='abyss'>Abyss</option>
           <option value='retro'>Retro</option>
         </select>
+        {bookingState.premium && (
+          <span className='badge badge-success ml-2 animate-pulse'>Premium unlocked</span>
+        )}
       </div>
       <nav className='flex-none'>
         <ul className='menu menu-horizontal px-1'>
