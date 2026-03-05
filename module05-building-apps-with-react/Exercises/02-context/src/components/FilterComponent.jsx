@@ -8,21 +8,21 @@ const FilterComponent = ({ setFilter }) => {
       <button
         type="button"
         onClick={() => setFilterInView("all")}
-        className="bg-gray-900 px-3 py-1 rounded"
+        className="bg-gray-900 px-3 py-1 rounded cursor-pointer"
       >
         All
       </button>
       <button
         type="button"
         onClick={() => setFilterInView("active")}
-        className="bg-gray-900 px-3 py-1 rounded"
+        className="bg-gray-900 px-3 py-1 rounded cursor-pointer"
       >
         Active
       </button>
       <button
         type="button"
         onClick={() => setFilterInView("completed")}
-        className="bg-gray-900 px-3 py-1 rounded"
+        className="bg-gray-900 px-3 py-1 rounded cursor-pointer"
       >
         Completed
       </button>

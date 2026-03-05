@@ -7,7 +7,7 @@ const App = () => {
   const [todos, setTodos] = useState(() =>
     localStorage.getItem("todos")
       ? JSON.parse(localStorage.getItem("todos"))
-      : []
+      : [],
   );
   const [filter, setFilter] = useState("all");
 

@@ -6,7 +6,7 @@ const ToDoItem = ({ todo, toggleTodo }) => {
           type="checkbox"
           checked={todo.completed}
           onChange={() => toggleTodo(todo.id)}
-          className="mr-2"
+          className="mr-2 cursor-pointer'"
         />
         <span className={todo.completed ? "line-through" : ""}>
           {todo.text}
