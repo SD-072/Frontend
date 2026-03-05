@@ -1,12 +1,27 @@
 import { NavLink } from 'react-router';
 
+import { useTheme } from '../../contexts/ThemeContextProvider';
+
 const NavBar = () => {
+  const { theme, changeTheme } = useTheme();
+
   return (
     <div className='navbar bg-base-100 shadow-sm'>
       <div className='flex-1'>
         <a className='btn btn-ghost text-xl' href='/'>
           Travel Agency
         </a>
+        <select
+          defaultValue={theme}
+          className='select'
+          onChange={(e) => changeTheme(e.target.value)}
+        >
+          <option value='halloween'>Halloween</option>
+          <option value='cyberpunk'>Cyberpunk</option>
+          <option value='dim'>Dim</option>
+          <option value='abyss'>Abyss</option>
+          <option value='retro'>Retro</option>
+        </select>
       </div>
       <nav className='flex-none'>
         <ul className='menu menu-horizontal px-1'>

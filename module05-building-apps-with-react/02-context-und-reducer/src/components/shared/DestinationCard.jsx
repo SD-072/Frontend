@@ -1,8 +1,12 @@
 import { Link } from 'react-router';
 
+import { useTheme } from '../../contexts/ThemeContextProvider';
+
 const DestinationCard = ({ title, image, text, slug }) => {
+  const { theme } = useTheme();
+
   return (
-    <div className='card bg-base-100 shadow-md'>
+    <div data-theme={theme} className='card bg-base-100 shadow-md'>
       <figure>
         <img src={image} alt='Tokyo' className='h-48 w-full object-cover' />
       </figure>

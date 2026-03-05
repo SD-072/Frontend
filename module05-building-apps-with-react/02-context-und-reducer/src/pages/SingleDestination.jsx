@@ -4,7 +4,7 @@ const SingleDestination = () => {
   //  URL http://blablabla.com/destinations/berlin
 
   const { slug } = useParams();
-  const destinations = useOutletContext();
+  const { destinations } = useOutletContext();
 
   const destination = destinations.find((d) => d.slug === slug);
 

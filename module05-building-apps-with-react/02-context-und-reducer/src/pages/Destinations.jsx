@@ -3,7 +3,7 @@ import { useOutletContext } from 'react-router';
 import { DestinationCard } from '../components';
 
 const Destinations = () => {
-  const destinations = useOutletContext();
+  const { destinations } = useOutletContext();
 
   return (
     <div className='mx-auto max-w-7xl space-y-10 px-4'>

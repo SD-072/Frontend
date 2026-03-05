@@ -1,6 +1,11 @@
 @import 'tailwindcss';
 @plugin 'daisyui' {
-  themes: halloween --default;
+  themes:
+    halloween --default,
+    cyberpunk,
+    dim,
+    abyss,
+    retro;
 }
 
 /* a.active {

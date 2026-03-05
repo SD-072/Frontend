@@ -3,7 +3,7 @@ import { useNavigate, useOutletContext } from 'react-router';
 import { DestinationCard } from '../components';
 
 const Home = () => {
-  const destinations = useOutletContext();
+  const { destinations } = useOutletContext();
 
   const navigate = useNavigate();
 

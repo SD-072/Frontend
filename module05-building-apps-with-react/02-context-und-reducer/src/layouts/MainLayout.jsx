@@ -17,7 +17,7 @@ const MainLayout = () => {
       <NavBar />
       <main className='container mx-auto mb-auto px-4 py-4'>
         {destinations ? (
-          <Outlet context={destinations} />
+          <Outlet context={{ destinations }} />
         ) : (
           <span className='loading loading-spinner loading-xl'></span>
         )}
