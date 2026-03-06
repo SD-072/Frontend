@@ -8,6 +8,11 @@ export const validate = ({ name, email, message }) => {
   }
   if (!message.trim()) newErrors.message = 'Message is required.';
   return newErrors;
+
+  // newErrors= {
+  //   name: 'Name is required.',
+  //   email: 'Invalid email format.'
+  // }
 };
 
 export const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
