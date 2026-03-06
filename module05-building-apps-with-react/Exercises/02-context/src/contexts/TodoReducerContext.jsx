@@ -35,6 +35,10 @@ function reducer(state, action) {
       );
       return { ...state, todos };
     }
+    case "DELETE_TODO": {
+      const todos = state.todos.filter((todo) => todo.id !== action.payload);
+      return { ...state, todos };
+    }
     default:
       throw new Error(`Unknown action: ${action.type}`);
   }
@@ -59,6 +63,10 @@ export default function TodoReducerProvider({ children }) {
     dispatch({ type: "TOGGLE_TODO", payload: id });
   }
 
+  function deleteTodo(id) {
+    dispatch({ type: "DELETE_TODO", payload: id });
+  }
+
   return (
     <TodoReducerContext
       value={{
@@ -67,6 +75,7 @@ export default function TodoReducerProvider({ children }) {
         addTodo,
         setFilter,
         toggleTodo,
+        deleteTodo,
       }}
     >
       {children}

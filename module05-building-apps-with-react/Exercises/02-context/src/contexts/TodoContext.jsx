@@ -38,6 +38,14 @@ export default function TodoContextProvider({ children }) {
     });
   };
 
+  const deleteTodo = (id) => {
+    setTodos((prevTodos) => {
+      const updatedTodos = prevTodos.filter((todo) => todo.id !== id);
+      localStorage.setItem("todos", JSON.stringify(updatedTodos));
+      return updatedTodos;
+    });
+  };
+
   const setFilterInView = (filter) => {
     setFilter(filter);
   };
@@ -51,6 +59,7 @@ export default function TodoContextProvider({ children }) {
         filter,
         setFilter,
         toggleTodo,
+        deleteTodo,
         setFilterInView,
       }}
     >

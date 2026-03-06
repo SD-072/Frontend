@@ -5,11 +5,11 @@ const ToDoItem = ({ todo }) => {
   // # Reading and updating one shared item
   // * Each item receives its own data, but the completed state still updates the single shared source of truth in context.
   // ! A checkbox should reflect state, not manage its own separate truth. Controlled inputs prevent UI and data from diverging.
-  const { toggleTodo } = use(TodoReducerContext);
+  const { toggleTodo, deleteTodo } = use(TodoReducerContext);
 
   return (
-    <li className="flex items-center mb-2">
-      <label>
+    <li className="mb-2 flex items-center justify-between gap-3 rounded border px-3 py-2">
+      <label className="flex items-center">
         <input
           type="checkbox"
           checked={todo.completed}
@@ -20,6 +20,13 @@ const ToDoItem = ({ todo }) => {
           {todo.text}
         </span>
       </label>
+      <button
+        type="button"
+        onClick={() => deleteTodo(todo.id)}
+        className="cursor-pointer rounded bg-red-500 px-3 py-1 text-white"
+      >
+        Delete
+      </button>
     </li>
   );
 };
