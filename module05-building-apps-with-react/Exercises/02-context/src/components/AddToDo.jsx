@@ -1,19 +1,20 @@
-import { useState } from "react";
+import { use, useState } from "react";
+import { TodoReducerContext } from "../contexts/todo-reducer-context";
 
-const AddToDo = ({ setTodos }) => {
+const AddToDo = () => {
   const [newTodo, setNewTodo] = useState("");
+
+  // # Dispatching shared updates
+  // * The form only cares about the intent to add a task. Context handles how the shared state changes.
+  // ! Keep submit handlers focused on validation and intent. Pushing full state logic into components makes them harder to reuse.
+  const { addTodo } = use(TodoReducerContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (!newTodo.trim()) return alert("Please enter a to-do item");
-    setTodos((prevTodos) => {
-      const updatedTodos = [
-        { id: Date.now(), text: newTodo, completed: false },
-        ...prevTodos,
-      ];
-      localStorage.setItem("todos", JSON.stringify(updatedTodos));
-      return updatedTodos;
-    });
+
+    addTodo(newTodo);
     setNewTodo("");
   };
 
