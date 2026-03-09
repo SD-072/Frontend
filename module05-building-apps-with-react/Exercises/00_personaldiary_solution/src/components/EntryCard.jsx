@@ -1,7 +1,8 @@
 function EntryCard({ entry, onViewEntryClick }) {
   return (
-    <div
-      className="card bg-base-100 cursor-pointer shadow-xl transition-shadow hover:shadow-2xl"
+    <button
+      type="button"
+      className="card bg-base-100 cursor-pointer shadow-xl transition-shadow hover:shadow-2xl text-left w-full"
       onClick={onViewEntryClick}
     >
       <figure>
@@ -15,7 +16,7 @@ function EntryCard({ entry, onViewEntryClick }) {
         <p>{new Date(entry.date).toLocaleDateString()}</p>{" "}
         {/* Format date for display */}
       </div>
-    </div>
+    </button>
   );
 }
 

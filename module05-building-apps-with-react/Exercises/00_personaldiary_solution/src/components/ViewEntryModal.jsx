@@ -11,7 +11,7 @@ function ViewEntryModal({ isOpen, onClose, entry, onDeleteEntry }) {
       <div className="modal-box">
         <EntryDetails entry={entry} onDeleteEntry={onDeleteEntry} />
         <div className="modal-action">
-          <button className="btn" onClick={onClose}>
+          <button className="btn" onClick={onClose} type="button">
             Close
           </button>
         </div>

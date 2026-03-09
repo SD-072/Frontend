@@ -5,7 +5,7 @@ function Header({ onAddEntryClick }) {
 
       <button
         onClick={onAddEntryClick} // Prop drilling - function passed from parent
-        className="rounded bg-white px-4 py-2 font-bold text-blue-500 transition hover:bg-gray-200"
+        className="rounded bg-white px-4 py-2 font-bold text-blue-500 transition hover:bg-gray-200" type="button"
       >
         Add Entry
       </button>

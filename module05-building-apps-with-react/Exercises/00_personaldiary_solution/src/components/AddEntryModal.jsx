@@ -18,7 +18,7 @@ function AddEntryModal({ isOpen, onClose, onAddEntry, entries }) {
         />
 
         <div className="modal-action">
-          <button className="btn" onClick={onClose}>
+          <button className="btn" onClick={onClose} type="button">
             Close
           </button>
         </div>

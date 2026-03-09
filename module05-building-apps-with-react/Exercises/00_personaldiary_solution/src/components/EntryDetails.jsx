@@ -14,8 +14,8 @@ function EntryDetails({ entry, onDeleteEntry }) {
 
       <button
         className="btn btn-error"
-        onClick={() => onDeleteEntry(entry.date)}
-      >
+        onClick={() => onDeleteEntry(entry.date)} 
+        type="button" >
         Delete Entry
       </button>
     </div>

@@ -1,11 +1,12 @@
 import { useState } from "react";
 
 function EntryForm({ onAddEntry, onClose, entries }) {
-  // Controlled components - React state is the single source of truth for input values
+    // Controlled components - React state is the single source of truth for input values
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [image, setImage] = useState("");
   const [content, setContent] = useState("");
+
 
   const handleFormAction = async (formData) => {
     const title = formData.get("title");
@@ -13,19 +14,19 @@ function EntryForm({ onAddEntry, onClose, entries }) {
     const image = formData.get("image");
     const content = formData.get("content");
 
-    // Basic form validation
+      // Basic form validation
     if (!title || !date || !content) {
       alert("Please fill in all required fields (Title, Date, Content).");
-      return;
+      return; 
     }
 
-    // Check for duplicate dates (one entry per day rule)
+        // Check for duplicate dates (one entry per day rule)
     const existingEntry = entries.find((entry) => entry.date === date);
     if (existingEntry) {
       alert(
         "An entry for this date already exists. Please choose another date.",
       );
-      return;
+      return; 
     }
     const newEntry = { title, date, image, content };
     onAddEntry(newEntry);
@@ -33,12 +34,13 @@ function EntryForm({ onAddEntry, onClose, entries }) {
   };
 
   return (
-    <form action={handleFormAction} className="space-y-4 py-4">
+     <form action={handleFormAction} className="space-y-4 py-4">
       <div>
-        <label className="label">
+        <label htmlFor="title" className="label">
           <span className="label-text">Title</span>
         </label>
         <input
+          id="title"
           type="text"
           name="title"
           value={title}
@@ -47,10 +49,11 @@ function EntryForm({ onAddEntry, onClose, entries }) {
         />
       </div>
       <div>
-        <label className="label">
+        <label htmlFor="date" className="label">
           <span className="label-text">Date</span>
         </label>
         <input
+          id="date"
           type="date"
           name="date"
           value={date}
@@ -59,10 +62,11 @@ function EntryForm({ onAddEntry, onClose, entries }) {
         />
       </div>
       <div>
-        <label className="label">
+        <label htmlFor="image" className="label">
           <span className="label-text">Image URL (Optional)</span>
         </label>
         <input
+          id="image"
           type="text"
           name="image"
           placeholder="https://example.com/image.jpg"
@@ -72,10 +76,11 @@ function EntryForm({ onAddEntry, onClose, entries }) {
         />
       </div>
       <div>
-        <label className="label">
+        <label htmlFor="content" className="label">
           <span className="label-text">Content</span>
         </label>
         <textarea
+          id="content"
           name="content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
