@@ -1,13 +1,13 @@
-import { use } from 'react';
-
-const SearchResults = ({ productsPromise }) => {
-  const { products } = use(productsPromise);
+const SearchResults = ({ products = [] }) => {
+  // # Learning Concept: this component now renders plain data instead of reading promises.
+  // * Keeping result cards presentational makes the data flow from the parent easier to follow.
 
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mt-6 w-full max-w-6xl mx-auto'>
-      {products.length === 0 ?
+      {products.length === 0 ? (
         <div className='col-span-full text-center text-gray-500'>No products found.</div>
-      : products.map((product) => (
+      ) : (
+        products.map((product) => (
           <div key={product.id} className='card bg-base-100 shadow-lg p-4 border rounded-box'>
             <div className='h-48 bg-white flex items-center justify-center rounded'>
               <img
@@ -23,7 +23,7 @@ const SearchResults = ({ productsPromise }) => {
             </div>
           </div>
         ))
-      }
+      )}
     </div>
   );
 };
