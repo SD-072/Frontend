@@ -51,19 +51,29 @@ export const getEventById = async (id) => {
   return data;
 };
 
-// # Create event / POST
+/**
+ * Create New Event
+ *
+ * Creates a new event (requires authentication!)
+ *
+ * @param {Object} eventData - { title, description, date, location }
+ * @returns {Object} - Created event with ID
+ * @throws {Error} - If not authenticated or validation fails
+ */
 export const createEvent = async (eventData) => {
+  // Get auth token (must be logged in to create events)
   const token = localStorage.getItem("token");
 
   if (!token) {
     throw new Error("No token found");
   }
 
+  // POST request with authentication
   const res = await fetch(API_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`, // Prove we're logged in
     },
     body: JSON.stringify(eventData),
   });
@@ -77,7 +87,16 @@ export const createEvent = async (eventData) => {
   return data;
 };
 
-// # updating an event / PUT
+/**
+ * Update Existing Event
+ *
+ * Updates an event by ID (requires authentication!)
+ *
+ * @param {string} id - The event ID
+ * @param {Object} eventData - { title, description, date, location }
+ * @returns {Object} - Updated event
+ * @throws {Error} - If not authenticated or validation fails
+ */
 export const updateEvent = async (id, eventData) => {
   const token = localStorage.getItem("token");
 

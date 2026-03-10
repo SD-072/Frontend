@@ -1,5 +1,5 @@
 import { useActionState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router";
 
 import { createEvent } from "../data";
 
@@ -42,6 +42,7 @@ const CreateEvent = () => {
     eventId: null,
   });
 
+  // Redirect to home after successful creation
   if (state.success && state.eventId) {
     return <Navigate to={`/event/${state.eventId}`} />;
   }
