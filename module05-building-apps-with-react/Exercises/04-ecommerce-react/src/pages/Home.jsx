@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext } from 'react-router';
 import { Alert, CategoryLinks, ProductCard, ProductCardSkeleton } from '@/components';
 
 const Home = () => {

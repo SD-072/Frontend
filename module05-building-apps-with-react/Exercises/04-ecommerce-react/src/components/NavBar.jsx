@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 const NavBar = ({ cart }) => {
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);

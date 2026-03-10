@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { addToCart, priceFormat, removeFromCart, resetCart } from '@/utils/cartUtils';
 
 const CartTable = ({ cart, setCart }) => {
