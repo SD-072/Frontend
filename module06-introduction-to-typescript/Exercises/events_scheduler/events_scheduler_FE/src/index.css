@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+/**
+ * DAISYUI THEME CONFIGURATION - Tailwind + DaisyUI
+ *
+ * Using DaisyUI's built-in "light" and "dark" themes with proper syntax.
+ *
+ * How it works:
+ * 1. DaisyUI provides pre-designed "light", "dark" and more themes
+ * 2. ThemeContext.jsx sets data-theme="light" or data-theme="dark" on <html>
+ * 3. DaisyUI automatically applies all theme colors
+ * 4. Components use semantic classes: bg-primary, text-base-content, btn-primary, etc.
+ *
+ * Theme flags:
+ * - --default: Makes this the default theme
+ * - --prefersdark: Automatically used when system prefers dark mode
+ *
+ * Benefits:
+ * - Zero configuration - uses DaisyUI's designed color palettes
+ * - Automatic color pairing (text-primary-content auto-contrasts with bg-primary)
+ * - Full Tailwind IntelliSense support
+ * - Consistent with DaisyUI documentation
+ */
+@plugin "daisyui" {
+  themes:
+    light --default,
+    dark --prefersdark;
+}
