@@ -2,7 +2,7 @@
 // Built-in Utility Types Practice
 // ------------------------------------------
 
-// 1. Partial
+// # 1. Partial
 // Use Partial to make all properties in the User type optional.
 
 type User = {
@@ -16,7 +16,7 @@ type User = {
 
 // const draftUser: ??? = { name: "Draft" };
 
-// 2. Required
+// # 2. Required
 // Use Required to make sure all fields are required.
 
 type Settings = {
@@ -29,7 +29,7 @@ type Settings = {
 
 // const strictSettings: ??? = { darkMode: true, fontSize: 16 };
 
-// 3. Readonly
+// # 3. Readonly
 // Make a Book object that cannot be edited after creation.
 
 type Book = {
@@ -43,7 +43,7 @@ type Book = {
 // const book: ??? = { title: "1984", author: "George Orwell" };
 // book.title = "Animal Farm"; // ❌ Should be a compile error
 
-// 4. Record
+// # 4. Record
 // You’re building a key-value map of scores per user.
 // Keys are usernames (string), values are numbers.
 
@@ -54,7 +54,7 @@ type Book = {
 //   bob: 36
 // };
 
-// 5. Pick
+// # 5. Pick
 // Pick only the name and email from the User type.
 
 type Contact = {
@@ -69,7 +69,7 @@ type Contact = {
 
 // const contactInfo: ??? = { name: "Grace", email: "grace@example.com" };
 
-// 6. Omit
+// # 6. Omit
 // Now do the reverse: remove the phone from Contact.
 
 // TODO: Create a type ContactNoPhone using Omit

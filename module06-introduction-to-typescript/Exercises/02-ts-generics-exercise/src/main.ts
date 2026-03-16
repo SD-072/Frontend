@@ -3,7 +3,7 @@
 // These functions are very common patterns in typed codebases.
 
 // ----------------------------------------------------
-// 1. Create a generic function called `wrapInArray`
+// # 1. Create a generic function called `wrapInArray`
 //    It should take a single value of any type and return an array with that value inside.
 //
 //    For example:
@@ -14,7 +14,7 @@
 //    Hint: Use a generic type parameter <T>
 
 // ----------------------------------------------------
-// 2. Create a generic function called `firstItem`
+// # 2. Create a generic function called `firstItem`
 //    It should take an array of any type and return the first element of that array.
 //    If the array is empty, return undefined.
 //
@@ -26,7 +26,7 @@
 //    Hint: return type should be T | undefined
 
 // ----------------------------------------------------
-// 3. Create a generic function called `mergeObjects`
+// # 3. Create a generic function called `mergeObjects`
 //    It should take two objects and merge them into a single object.
 //    The resulting object should contain all the keys and values from both.
 //
@@ -40,7 +40,7 @@
 //    Hint: Use <T, U> as generic type parameters and return T & U
 
 // ----------------------------------------------------
-// 4. Create a type alias called `ApiResponse<T>`
+// # 4. Create a type alias called `ApiResponse<T>`
 //    It should describe an object with:
 //    - `success: boolean`
 //    - `data: T`
@@ -53,7 +53,7 @@
 //      data: { name: "Ada", age: 36 }
 //    };
 // ----------------------------------------------------
-// 5. Create a generic function called `pluck`
+// # 5. Create a generic function called `pluck`
 //    It should take an object and a key, and return the value at that key.
 //
 //    - The object can be of any shape (use a generic type T)
