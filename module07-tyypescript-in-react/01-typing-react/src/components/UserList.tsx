@@ -14,10 +14,14 @@ const UserList = () => {
   const [status, setStatus] = useState<ComponentStatus>('idle');
 
   useEffect(() => {
-    setStatus('loading');
-    // async fetch logic ...
-    setUsers(userArr);
-    setStatus('success');
+    const loadUsers = async () => {
+      setStatus('loading');
+      const res = await fetch('/api/users');
+      const data = await res.json();
+      setUsers(data);
+      setStatus('success');
+    };
+    loadUsers();
   }, []);
 
   return (
