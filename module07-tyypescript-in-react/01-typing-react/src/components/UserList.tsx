@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { ComponentStatus, User } from '../types/user.types';
+import type { ComponentStatus, User } from '../types';
 
 const userArr: User[] = [
   { id: 1, username: 'Guybrush', info: 'alert' },
