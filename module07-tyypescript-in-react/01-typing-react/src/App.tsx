@@ -17,7 +17,7 @@ function App() {
         variant='primary'
         onClick={(e) => console.log(e.clientX)}
         style={{ backgroundColor: 'rebeccapurple' }}
-        disabled={true}
+        // disabled={true}
         type='button'
         title='Click me!'
         className='extra-class'>
