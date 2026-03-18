@@ -1,9 +1,10 @@
 import { useOutletContext } from 'react-router';
 
 import { DestinationCard } from '../components';
+import type { Destiantion } from '../types';
 
 const Destinations = () => {
-  const destinations = useOutletContext();
+  const destinations = useOutletContext<Destiantion[]>();
 
   return (
     <div className='mx-auto max-w-7xl space-y-10 px-4'>
@@ -16,7 +17,13 @@ const Destinations = () => {
       </section>
       <section className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
         {destinations.map(({ title, image, description, slug }) => (
-          <DestinationCard key={slug} title={title} image={image} text={description} slug={slug} />
+          <DestinationCard
+            key={slug}
+            title={title}
+            image={image}
+            description={description}
+            slug={slug}
+          />
         ))}
       </section>
     </div>

@@ -2,8 +2,9 @@ import { Link } from 'react-router';
 
 import { useBooking } from '../../contexts/BookingContext';
 import { useTheme } from '../../contexts/ThemeContext';
+import type { Destiantion } from '../../types';
 
-const DestinationCard = ({ title, image, text, slug }) => {
+const DestinationCard = ({ title, image, description, slug }: Omit<Destiantion, 'id'>) => {
   const { theme } = useTheme();
   const { bookingState, addDestination, removeDestination } = useBooking();
 
@@ -26,7 +27,7 @@ const DestinationCard = ({ title, image, text, slug }) => {
         <Link to={`/destinations/${slug}`}>
           <h2 className='card-title hover:text-primary text-lg font-semibold'>{title}</h2>
         </Link>
-        <p>{text}</p>
+        <p>{description}</p>
         <div className='card-actions justify-end'>
           <button onClick={handleClick} className='btn btn-primary' type='button'>
             {isBooked ? 'Unbook' : 'Book Now'}

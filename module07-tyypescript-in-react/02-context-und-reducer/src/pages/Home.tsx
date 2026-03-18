@@ -1,13 +1,14 @@
+import type { SubmitEventHandler } from 'react';
 import { useNavigate, useOutletContext } from 'react-router';
-
 import { DestinationCard } from '../components';
+import type { Destiantion } from '../types';
 
 const Home = () => {
-  const destinations = useOutletContext();
+  const destinations = useOutletContext<Destiantion[]>();
 
   const navigate = useNavigate();
 
-  const handleSearch = (e) => {
+  const handleSearch: SubmitEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     navigate('/destinations');
   };
@@ -62,13 +63,7 @@ const Home = () => {
         <h2 className='text-secondary text-center text-3xl font-bold'>Popular Destinations</h2>
         <div className='grid gap-6 md:grid-cols-3'>
           {destinations?.slice(0, 3).map((destination) => (
-            <DestinationCard
-              key={destination.slug}
-              title={destination.title}
-              image={destination.image}
-              text={destination.description}
-              slug={destination.slug}
-            />
+            <DestinationCard key={destination.slug} {...destination} />
           ))}
         </div>
       </section>

@@ -1,22 +1,41 @@
+import { useRef } from 'react';
 import { NavLink } from 'react-router';
-
 import { useBooking } from '../../contexts/BookingContext';
-import { useTheme } from '../../contexts/ThemeContext';
+import { type UsableThemes, useTheme } from '../../contexts/ThemeContext';
 
 const NavBar = () => {
   const { theme, changeTheme } = useTheme();
   const { bookingState } = useBooking();
 
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
   return (
     <div className='navbar bg-base-100 shadow-sm'>
+      <button
+        type='button'
+        onClick={() => {
+          dialogRef.current?.showModal();
+        }}
+        className='cursor-progress'
+      >
+        Modal
+      </button>
+      <dialog
+        ref={dialogRef}
+        id='my-dialog'
+        className='inset-1/2 border-cyan-500 bg-indigo-700 p-3'
+      >
+        Hello from Dialog
+      </dialog>
+
       <div className='flex-1'>
         <a className='btn btn-ghost text-xl' href='/'>
           Travel Agency
         </a>
         <select
           defaultValue={theme}
-          className='select'
-          onChange={(e) => changeTheme(e.target.value)}
+          className='select-sm select-ghost'
+          onChange={(e) => changeTheme(e.target.value as UsableThemes)}
         >
           <option value='halloween'>Halloween</option>
           <option value='cyberpunk'>Cyberpunk</option>

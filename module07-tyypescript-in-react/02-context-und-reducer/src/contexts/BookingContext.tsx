@@ -1,13 +1,36 @@
-import { createContext, use, useReducer } from 'react';
+import { createContext, type ReactNode, use, useReducer } from 'react';
 
-const BookingContext = createContext(undefined);
+type BookingState = {
+  destinations: string[];
+  premium: boolean;
+};
 
-const initialState = {
+type BookingContextType = {
+  bookingState: BookingState;
+  addDestination: (destinationSlug: string) => void;
+  removeDestination: (destinationSlug: string) => void;
+};
+
+type AddAction = {
+  type: 'ADD_BOOKING';
+  payload: string;
+};
+
+type RemoveAction = {
+  type: 'REMOVE_DESTINATION';
+  payload: string;
+};
+
+type BookingAction = AddAction | RemoveAction;
+
+const BookingContext = createContext<BookingContextType | null>(null);
+
+const initialState: BookingState = {
   destinations: [],
   premium: false,
 };
 
-function reducer(bookingState, action) {
+function reducer(bookingState: BookingState, action: BookingAction) {
   // console.log('reducer func: ', { bookingState, action });
 
   switch (action.type) {
@@ -27,20 +50,20 @@ function reducer(bookingState, action) {
       return { ...bookingState, destinations: newDestinations, premium };
     }
     default:
-      throw new Error(`Unkown action type: ${action.type}`);
+      throw new Error(`Unkown action type: ${JSON.stringify(action)}`);
   }
 }
 
-export default function BookingContextProvider({ children }) {
+export default function BookingContextProvider({ children }: { children: ReactNode }) {
   const [bookingState, dispatch] = useReducer(reducer, initialState);
 
   console.log('current bookingState: ', bookingState);
 
-  function addDestination(destinationSlug) {
+  function addDestination(destinationSlug: string) {
     dispatch({ type: 'ADD_BOOKING', payload: destinationSlug });
   }
 
-  function removeDestination(destinationSlug) {
+  function removeDestination(destinationSlug: string) {
     dispatch({ type: 'REMOVE_DESTINATION', payload: destinationSlug });
   }
 
@@ -53,7 +76,11 @@ export default function BookingContextProvider({ children }) {
 
 // eslint-disable-next-line react-refresh/only-export-components
 export function useBooking() {
-  return use(BookingContext);
+  const context = use(BookingContext);
+  if (!context) {
+    throw new Error('useBooking must be used within BookingContextProvider');
+  }
+  return context;
 }
 
 // // useState

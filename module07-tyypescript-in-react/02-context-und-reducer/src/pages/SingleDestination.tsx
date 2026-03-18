@@ -1,10 +1,11 @@
 import { useOutletContext, useParams } from 'react-router';
+import type { Destiantion } from '../types';
 
 const SingleDestination = () => {
   //  URL http://blablabla.com/destinations/berlin
 
   const { slug } = useParams();
-  const destinations = useOutletContext();
+  const destinations = useOutletContext<Destiantion[]>();
 
   const destination = destinations.find((d) => d.slug === slug);
 

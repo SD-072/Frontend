@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router';
 
 import { Footer, NavBar } from '../components';
+import type { Destiantion } from '../types';
 
 const MainLayout = () => {
-  const [destinations, setDestinations] = useState(null);
+  const [destinations, setDestinations] = useState<Destiantion[] | null>(null);
 
   useEffect(() => {
     fetch('/travel.json')
