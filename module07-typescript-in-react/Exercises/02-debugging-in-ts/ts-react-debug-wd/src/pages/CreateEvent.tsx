@@ -1,18 +1,24 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
-import { useAuth } from '@/contexts';
+import { type RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { CreateEventModal } from '@/components';
+import { useAuth } from '@/contexts';
 import { getAllEvents } from '@/data';
+import type { ApiEvent, EventResponse } from '@/types';
+
+export type CreateEventModalProps = {
+  refreshForNewEvent: () => void;
+  modalRef: RefObject<HTMLDialogElement | null>;
+};
 
 const CreateEvent = () => {
-  const [allEvents, setAllEvents] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [hasNextPage, setHasNextPage] = useState();
+  const [allEvents, setAllEvents] = useState<ApiEvent[]>([]);
+  const [currentPage, setCurrentPage] = useState<EventResponse['currentPage']>(1);
+  const [hasNextPage, setHasNextPage] = useState<EventResponse['hasNextPage']>(false);
   const [loading, setLoading] = useState(false);
   const [refreshEvents, setRefreshEvents] = useState(false);
   const [isNewEvent, setIsNewEvent] = useState(false);
 
   const { user } = useAuth();
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     let ignore = false;
@@ -74,7 +80,7 @@ const CreateEvent = () => {
 
     setCurrentPage((prev) => prev + 1);
     setRefreshEvents(true);
-  }, [hasNextPage, setCurrentPage, loading]);
+  }, [hasNextPage, loading]);
 
   const refreshForNewEvent = () => {
     setCurrentPage(1);

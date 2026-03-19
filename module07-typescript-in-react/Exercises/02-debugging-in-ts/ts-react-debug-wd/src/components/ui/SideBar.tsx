@@ -1,8 +1,9 @@
+import type { RefObject } from 'react';
 import { Link } from 'react-router';
 import { useAuth } from '@/contexts';
 import { menuList } from '@/utils';
 
-const SideBar = ({ drawerRef }) => {
+const SideBar = ({ drawerRef }: { drawerRef: RefObject<HTMLInputElement | null> }) => {
   const { isAuthenticated, logout } = useAuth();
 
   const closeSidebar = () => {
@@ -37,13 +38,15 @@ const SideBar = ({ drawerRef }) => {
             </li>
           ))}
         {isAuthenticated && (
-          <li
-            onClick={() => {
-              logout();
-              closeSidebar();
-            }}
-          >
-            <span>Log out</span>
+          <li>
+            <button
+              onClick={() => {
+                logout();
+                closeSidebar();
+              }}
+            >
+              <span>Log out</span>
+            </button>
           </li>
         )}
       </ul>

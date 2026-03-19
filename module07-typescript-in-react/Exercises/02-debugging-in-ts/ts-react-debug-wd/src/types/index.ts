@@ -39,4 +39,56 @@ type RegisterActionType =
       success?: undefined;
     };
 
-export type { EventResponse, ApiEvent, User, RegisterActionType };
+type LoginActionType =
+  | {
+      success: boolean;
+      user: {
+        id: number;
+        email: string;
+      };
+      token: string;
+      error?: undefined;
+    }
+  | {
+      error: string;
+      success?: undefined;
+      user?: undefined;
+      token?: undefined;
+    };
+
+type LoginResponse = {
+  user: Pick<User, 'id' | 'email'>;
+  token: string;
+};
+
+type AuthContextType = {
+  user: User | null;
+  token: string | null;
+  login: (token: string | null) => void;
+  logout: () => void;
+  isAuthenticated: boolean;
+  loading: boolean;
+};
+
+type CreateEventActionType =
+  | {
+      success: boolean;
+      message: string;
+      error?: undefined;
+    }
+  | {
+      error: string;
+      success?: undefined;
+      message?: undefined;
+    };
+
+export type {
+  EventResponse,
+  ApiEvent,
+  User,
+  RegisterActionType,
+  LoginActionType,
+  LoginResponse,
+  AuthContextType,
+  CreateEventActionType
+};

@@ -1,8 +1,20 @@
-import { useActionState, useState, useEffect, useRef, startTransition } from 'react';
+import {
+  type ChangeEvent,
+  startTransition,
+  useActionState,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import { createEventAction } from '@/actions';
+import type { CreateEventModalProps } from '@/pages/CreateEvent';
+import type { CreateEventActionType } from '@/types';
 
-export default function CreateEventModal({ refreshForNewEvent, modalRef }) {
-  const [actionData, submitAction, isPending] = useActionState(createEventAction, {});
+export default function CreateEventModal({ refreshForNewEvent, modalRef }: CreateEventModalProps) {
+  const [actionData, submitAction, isPending] = useActionState(
+    createEventAction,
+    {} as CreateEventActionType
+  );
   const [form, setForm] = useState({
     title: '',
     description: '',
@@ -13,7 +25,7 @@ export default function CreateEventModal({ refreshForNewEvent, modalRef }) {
   });
   const formRef = useRef(null);
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 

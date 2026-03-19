@@ -2,9 +2,12 @@ import { type ChangeEvent, useActionState, useEffect, useState } from 'react';
 import { Link, Navigate } from 'react-router';
 import { loginAction } from '@/actions';
 import { useAuth } from '@/contexts';
+import type { LoginActionType } from '@/types';
+
+const initalState: LoginActionType = { error: '' };
 
 const Login = () => {
-  const [actionData, submitAction, isPending] = useActionState(loginAction, {});
+  const [actionData, submitAction, isPending] = useActionState(loginAction, initalState);
   const [form, setForm] = useState({ email: '', password: '' });
   const { isAuthenticated, login } = useAuth();
 

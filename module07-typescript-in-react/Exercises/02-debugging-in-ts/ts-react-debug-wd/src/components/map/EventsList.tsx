@@ -1,6 +1,14 @@
-const EventsList = ({ events, setHighlightedEvent }) => {
+import type { Dispatch, SetStateAction } from 'react';
+import type { ApiEvent } from '@/types';
+
+type EventListProps = {
+  events: ApiEvent[];
+  setHighlightedEvent: Dispatch<SetStateAction<ApiEvent | null>>;
+};
+
+const EventsList = ({ events, setHighlightedEvent }: EventListProps) => {
   return events.map((event) => (
-    <div
+    <button
       key={event.id}
       className='card bg-base-100 shadow-xl cursor-pointer'
       onClick={() => setHighlightedEvent(event)}
@@ -15,7 +23,7 @@ const EventsList = ({ events, setHighlightedEvent }) => {
           <strong>Location:</strong> {event.location}
         </p>
       </div>
-    </div>
+    </button>
   ));
 };
 

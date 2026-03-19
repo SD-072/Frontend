@@ -9,7 +9,7 @@ const Events = () => {
   const [allEvents, setAllEvents] = useState<ApiEvent[]>([]);
   const [currentPage, setCurrentPage] = useState<EventResponse['currentPage']>(1);
   const [hasNextPage, setHasNextPage] = useState<EventResponse['hasNextPage']>(false);
-  const [highlightedEvent, setHighlightedEvent] = useState(null);
+  const [highlightedEvent, setHighlightedEvent] = useState<ApiEvent | null>(null);
   const [loading, setLoading] = useState(false);
   const [refreshEvents, setRefreshEvents] = useState(true);
   const observerRef = useRef(null);

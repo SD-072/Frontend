@@ -1,9 +1,12 @@
 import z from 'zod/v4';
-import type { RegisterActionType } from '@/types';
+import type { LoginActionType, LoginResponse, RegisterActionType } from '@/types';
 
 const API_URL = import.meta.env.VITE_EVENTS_API_URL;
 
-export const loginAction = async (_, formData) => {
+export const loginAction = async (
+  _: LoginActionType,
+  formData: FormData
+): Promise<LoginActionType> => {
   try {
     const email = formData.get('email');
     const password = formData.get('password');
@@ -27,7 +30,9 @@ export const loginAction = async (_, formData) => {
       const error = await response.json();
       throw new Error(error.error || 'Login failed');
     }
-    const { user, token } = await response.json();
+    const dataLogin: LoginResponse = await response.json();
+    console.log('LOGIN: ', dataLogin);
+    const { user, token } = dataLogin;
     return {
       success: true,
       user,

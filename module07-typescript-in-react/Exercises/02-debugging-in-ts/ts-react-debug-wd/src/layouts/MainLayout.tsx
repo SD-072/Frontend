@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 import { Outlet } from 'react-router';
-import { NavBar, SideBar, Footer } from '@/components';
+import { Footer, NavBar, SideBar } from '@/components';
 
 const MainLayout = () => {
-  const drawerRef = useRef(null);
+  const drawerRef = useRef<HTMLInputElement>(null);
 
   return (
     <div className='drawer bg-base-200'>
