@@ -6,8 +6,7 @@ import {
   IceCreamOrderSchema,
   iceCreamFlavours,
 } from "./schemas/iceCreamSchema";
-
-type IceCreamOrderType = z.infer<typeof IceCreamOrderSchema>;
+import type { IceCreamOrderType } from "./types";
 
 const initialForm = {
   scoop: [] as string[],
