@@ -6,15 +6,22 @@ export const iceCreamFlavours = [
   "stracciatella",
   "mango",
   "lemon",
-  "smurf",
 ];
 
 const IceCreamOrderSchema = z.object({
-  scoop: z.array(z.enum(iceCreamFlavours)), // ["chocolate", "vanialla", "stracciatella"],
+  scoop: z.array(z.enum(iceCreamFlavours)).min(1, {
+    error: "Please choose at least one flavour.",
+  }), // ["chocolate", "vanialla", "stracciatella"],
   cone: z.boolean(), // true,
-  sprinkles: z.string().trim().optional(), // "chocolate",
+  sprinkles: z
+    .string()
+    .trim()
+    .min(3, {
+      error: "Sprinkles must be at least 3 characters.",
+    })
+    .optional(), // "chocolate",
   spoon: z.boolean().default(false), // true,
-  creamAmount: z
+  creamAmount: z.coerce
     .number()
     .min(0, { error: "Too little cream." })
     .max(5, { error: "Too much cream" }), // 2,

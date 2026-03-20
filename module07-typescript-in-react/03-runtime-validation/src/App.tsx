@@ -1,140 +1,161 @@
-import { useActionState, useId, useState } from "react";
-import "./App.css";
+import { type SubmitEvent, useId, useState } from "react";
+import { z } from "zod";
 
-import z from "zod";
+import "./App.css";
 import {
   IceCreamOrderSchema,
   iceCreamFlavours,
 } from "./schemas/iceCreamSchema";
 
-const initialState: IceCreamState = {
-  error: "",
+type IceCreamOrderType = z.infer<typeof IceCreamOrderSchema>;
+
+const initialForm = {
+  scoop: [] as string[],
   cone: true,
-  creamAmount: 0,
-  scoops: "",
+  sprinkles: "",
   spoon: false,
-  sprinkles: undefined,
+  creamAmount: "0",
 };
 
-//  Action for processing the ice cream order
-async function iceCreamAction(_prev: IceCreamState, formData: FormData) {
-  const rawData = Object.fromEntries(formData);
-  const scoops = String(rawData.scoops ?? "")
-    .split(",")
-    .map((s) => s.trim())
-    .filter(Boolean);
-
-  // Transforms the raw form data into the expected order format
-  const orderToSend = {
-    scoop: scoops,
-    // Checkbox to Boolean: If "on", then true
-    cone: !!rawData.cone,
-    spoon: !!rawData.spoon,
-    // String to Number
-    creamAmount: Number(rawData.cream) || 0,
-    // ... and the other fields
-    sprinkles: rawData.sprinkles,
-  };
-
-  // Validates the order with the Zod schema
-  // safeParse returns an object with success, data and error
-  const { error, success } = IceCreamOrderSchema.safeParse(orderToSend);
-
-  // If validation was successful
-  if (success) {
-    console.log("Doing the fetch");
-    // Normally an API call would take place here
-    // Form is reset to initial state
-    return initialState;
-  }
-
-  // In case of validation errors: Returns the current state with error message
-  // Keeps the entered values so the user can correct them
-  return {
-    ...initialState,
-    scoops: rawData.scoops as string,
-    sprinkles: rawData.sprinkles as string | undefined,
-    // Formats the Zod error into a readable error message
-    error: z.prettifyError(error),
-  };
-}
-
 function App() {
-  const [scoops, setScoops] = useState<string[]>([]);
-  const [state, action, pending] = useActionState(iceCreamAction, initialState);
+  const [form, setForm] = useState(initialForm);
+  const [error, setError] = useState("");
+  const [submittedOrder, setSubmittedOrder] =
+    useState<IceCreamOrderType | null>(null);
   const id = useId();
 
-  console.log(scoops);
+  function handleScoopChange(flavour: string, checked: boolean) {
+    setForm((currentForm) => ({
+      ...currentForm,
+      scoop: checked
+        ? [...currentForm.scoop, flavour]
+        : currentForm.scoop.filter((item) => item !== flavour),
+    }));
+  }
+
+  function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const result = IceCreamOrderSchema.safeParse({
+      ...form,
+      sprinkles: form.sprinkles.trim() || undefined,
+    });
+
+    if (!result.success) {
+      setError(z.prettifyError(result.error));
+      setSubmittedOrder(null);
+      return;
+    }
+
+    setError("");
+    setSubmittedOrder(result.data);
+    setForm(initialForm);
+  }
 
   return (
     <div>
-      <form action={action} style={{ marginTop: "20px" }}>
-        <div style={{ margin: "15px 0" }}>
-          <label htmlFor={`${id}-scoops`}>Ice Cream Flavors:</label>
-          <select
-            name="scoops-collect"
-            id={`${id}-scoops-collect`}
-            style={{ textTransform: "capitalize" }}
-            onChange={(e) => setScoops((s) => [...s, e.target.value])}
-          >
-            {iceCreamFlavours.map((f) => (
-              <option key={f} value={f}>
-                {f}
-              </option>
-            ))}
-          </select>
-          <input
-            name="scoops"
-            id={`${id}-scoops`}
-            defaultValue={scoops.join(",")} // ["a", "b"] => "a,b"
-            // readOnly
-          ></input>
+      <form onSubmit={handleSubmit} className="mt-5">
+        <div className="my-3]">
+          <p id={`${id}-scoops`} className="mb-2]">
+            Ice Cream Flavors:
+          </p>
+
+          {iceCreamFlavours.map((flavour) => (
+            <label
+              key={flavour}
+              htmlFor={`${id}-${flavour}`}
+              className="block capitalize"
+            >
+              <input
+                id={`${id}-${flavour}`}
+                type="checkbox"
+                checked={form.scoop.includes(flavour)}
+                onChange={(event) =>
+                  handleScoopChange(flavour, event.target.checked)
+                }
+              />{" "}
+              {flavour}
+            </label>
+          ))}
         </div>
 
-        <div style={{ margin: "15px 0" }}>
+        <div className="my-3">
           <label>
-            <input type="checkbox" name="cone" defaultChecked={state.cone} />
+            <input
+              type="checkbox"
+              checked={form.cone}
+              onChange={(event) =>
+                setForm((currentForm) => ({
+                  ...currentForm,
+                  cone: event.target.checked,
+                }))
+              }
+            />
             Serve in cone
           </label>
         </div>
 
-        <div style={{ margin: "15px 0" }}>
+        <div className="my-3">
           <label>
             Sprinkles:
             <input
               type="text"
-              name="sprinkles"
               placeholder="Enter sprinkles type"
-              defaultValue={state.sprinkles}
+              className="border border-gray-400 rounded"
+              value={form.sprinkles}
+              onChange={(event) =>
+                setForm((currentForm) => ({
+                  ...currentForm,
+                  sprinkles: event.target.value,
+                }))
+              }
             />
           </label>
         </div>
 
-        <div style={{ margin: "15px 0" }}>
+        <div className="my-3">
           <label>
-            <input type="checkbox" name="spoon" defaultChecked={state.spoon} />
+            <input
+              type="checkbox"
+              checked={form.spoon}
+              onChange={(event) =>
+                setForm((currentForm) => ({
+                  ...currentForm,
+                  spoon: event.target.checked,
+                }))
+              }
+            />
             Need a spoon
           </label>
         </div>
 
-        <div style={{ margin: "15px 0" }}>
+        <div className="my-3">
           <label>
-            Cream amount (1-5):
+            Cream amount (0-5):
             <input
               type="number"
-              name="cream"
               min="0"
               max="5"
-              defaultValue={state.creamAmount}
+              className="border border-gray-400 rounded"
+              value={form.creamAmount}
+              onChange={(event) =>
+                setForm((currentForm) => ({
+                  ...currentForm,
+                  creamAmount: event.target.value,
+                }))
+              }
             />
           </label>
         </div>
 
-        <button type="submit" disabled={pending}>
-          {pending ? "Placing Order..." : "Place Order"}
+        <button type="submit" className="border border-gray-400 rounded">
+          Place Order
         </button>
       </form>
-      {state.error && <p style={{ color: "red" }}>{state.error}</p>}
+
+      {error && <p className="whitespace-pre-wrap text-red-500">{error}</p>}
+
+      {submittedOrder && <pre>{JSON.stringify(submittedOrder, null, 2)}</pre>}
     </div>
   );
 }
