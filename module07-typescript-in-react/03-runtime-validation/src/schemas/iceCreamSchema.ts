@@ -2,46 +2,53 @@ import { z } from "zod";
 
 export const iceCreamFlavours = [
   "chocolate",
-  "vanialla",
+  "vanilla",
   "stracciatella",
   "mango",
   "lemon",
 ];
 
+// # Runtime validation for form data
+// * A schema lets the UI accept flexible input first, then normalize and validate it in one place.
 const IceCreamOrderSchema = z.object({
   scoop: z.array(z.enum(iceCreamFlavours)).min(1, {
     error: "Please choose at least one flavour.",
-  }), // ["chocolate", "vanialla", "stracciatella"],
-  cone: z.boolean(), // true,
+  }),
+  cone: z.boolean(),
   sprinkles: z
     .string()
     .trim()
     .min(3, {
       error: "Sprinkles must be at least 3 characters.",
     })
-    .optional(), // "chocolate",
-  spoon: z.boolean().default(false), // true,
+    .optional(),
+  spoon: z.boolean().default(false),
   creamAmount: z.coerce
     .number()
     .min(0, { error: "Too little cream." })
-    .max(5, { error: "Too much cream" }), // 2,
+    .max(5, { error: "Too much cream" }),
 });
 
 export { IceCreamOrderSchema };
 
-// const order = {
-//   scoop: ["chocolate", "nougat"],
-//   sprinkles: "chocolate",
-//   spoon: true,
-//   creamAmount: -3,
-// };
+// # Demo parse result
+// * This example shows why schemas are useful: one invalid value can explain exactly what failed.
+const sampleOrder = {
+  scoop: ["chocolate", "nougat"],
+  sprinkles: "chocolate",
+  spoon: true,
+  creamAmount: -3,
+};
 
-// const { data, error, success } = IceCreamOderSchema.safeParse(order);
+const sampleOrderResult = IceCreamOrderSchema.safeParse(sampleOrder);
 
-// if (success) {
-//   console.log("success:  ", success, data);
-// }
+if (import.meta.env.DEV) {
+  if (sampleOrderResult.success) {
+    console.log("sampleOrderResult", sampleOrderResult.data);
+  }
 
-// if (!success) {
-//   console.log("error: ", z.prettifyError(error));
-// }
+  if (!sampleOrderResult.success) {
+    // ! `z.prettifyError` is useful for teaching because it turns nested issues into readable feedback.
+    console.log("sampleOrderError", z.prettifyError(sampleOrderResult.error));
+  }
+}

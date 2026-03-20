@@ -17,6 +17,8 @@ const initialForm = {
 };
 
 function App() {
+  // # Runtime validation inside a React form
+  // * The form stores raw input strings first, then Zod validates and transforms the final payload on submit.
   const [form, setForm] = useState(initialForm);
   const [error, setError] = useState("");
   const [submittedOrder, setSubmittedOrder] =
@@ -35,6 +37,7 @@ function App() {
   function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    // * `safeParse` keeps invalid form input from crashing the component and returns a typed result when valid.
     const result = IceCreamOrderSchema.safeParse({
       ...form,
       sprinkles: form.sprinkles.trim() || undefined,
@@ -52,12 +55,12 @@ function App() {
   }
 
   return (
-    <div>
+    <main>
       <form onSubmit={handleSubmit} className="mt-5">
-        <div className="my-3]">
-          <p id={`${id}-scoops`} className="mb-2]">
+        <fieldset className="my-3">
+          <legend id={`${id}-scoops`} className="mb-2">
             Ice Cream Flavors:
-          </p>
+          </legend>
 
           {iceCreamFlavours.map((flavour) => (
             <label
@@ -76,7 +79,7 @@ function App() {
               {flavour}
             </label>
           ))}
-        </div>
+        </fieldset>
 
         <div className="my-3">
           <label>
@@ -152,10 +155,13 @@ function App() {
         </button>
       </form>
 
-      {error && <p className="whitespace-pre-wrap text-red-500">{error}</p>}
-
-      {submittedOrder && <pre>{JSON.stringify(submittedOrder, null, 2)}</pre>}
-    </div>
+      {error ? (
+        <p className="whitespace-pre-wrap text-red-500">{error}</p>
+      ) : null}
+      {submittedOrder ? (
+        <pre>{JSON.stringify(submittedOrder, null, 2)}</pre>
+      ) : null}
+    </main>
   );
 }
 

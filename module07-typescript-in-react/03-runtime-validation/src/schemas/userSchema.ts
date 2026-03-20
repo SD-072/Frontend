@@ -1,41 +1,20 @@
 import { z } from "zod";
 
-// type UserResponse = {
-//   id: number;
-//   name: string;
-//   username: string;
-//   email: string;
-//   address: {
-//     street: string;
-//     suite: string;
-//     city: string;
-//     zipcode: string;
-//     geo: {
-//       lat: string;
-//       lng: string;
-//     };
-//   };
-//   phone: string;
-//   website: string;
-//   company: {
-//     name: string;
-//     catchPhrase: string;
-//     bs: string;
-//   };
-// };
-
+// # Nested API response validation
+// * Backend data often arrives as strings in deep objects. Schemas keep that conversion close to the shape being validated.
 const AddressSchema = z.object({
   street: z.string(),
   suite: z.string(),
   city: z.string(),
   zipcode: z.string(),
+  //     lat: z.union([
+  //       z.number({ error: "This should be a number or a string" }),
+  //       z.string(),
+  //     ]),
+  //     lng: z.number().or(z.string()), // shorthand version of union - order doesn't matter
+  //   }),
   geo: z.object({
-    //     lat: z.union([
-    //       z.number({ error: "This should be a number or a string" }),
-    //       z.string(),
-    //     ]),
-    //     lng: z.number().or(z.string()), // shorthand version of union - order doesn't matter
-    //   }),
+    // * `coerce` is cleaner than a union when the API is allowed to send numeric strings.
     lat: z.coerce.number({ error: "This should be a number" }),
     lng: z.coerce.number(),
   }),
