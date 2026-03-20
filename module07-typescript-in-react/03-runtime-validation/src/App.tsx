@@ -75,7 +75,7 @@ function App() {
                 onChange={(event) =>
                   handleScoopChange(flavour, event.target.checked)
                 }
-              />{" "}
+              />
               {flavour}
             </label>
           ))}
