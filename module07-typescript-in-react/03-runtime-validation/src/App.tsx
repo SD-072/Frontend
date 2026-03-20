@@ -100,7 +100,7 @@ function App() {
             <input
               type="text"
               placeholder="Enter sprinkles type"
-              className="border border-gray-400 rounded"
+              className="border border-gray-400 rounded p-1"
               value={form.sprinkles}
               onChange={(event) =>
                 setForm((currentForm) => ({
@@ -135,7 +135,7 @@ function App() {
               type="number"
               min="0"
               max="5"
-              className="border border-gray-400 rounded"
+              className="border border-gray-400 rounded p-1"
               value={form.creamAmount}
               onChange={(event) =>
                 setForm((currentForm) => ({
@@ -147,7 +147,7 @@ function App() {
           </label>
         </div>
 
-        <button type="submit" className="border border-gray-400 rounded">
+        <button type="submit" className="border border-gray-400 rounded p-1">
           Place Order
         </button>
       </form>
