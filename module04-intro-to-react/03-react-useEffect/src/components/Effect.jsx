@@ -51,9 +51,7 @@ const Effect = () => {
     <div>
       {todo && <p>{todo.title}</p>}
 
-      <button type='button' onClick={() => setCount((c) => c + 1)}>
-        Count: {count}
-      </button>
+      <button onClick={() => setCount((c) => c + 1)}>Count: {count}</button>
     </div>
   );
 };

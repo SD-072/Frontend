@@ -1,9 +1,9 @@
-import bcrypt from "bcrypt";
-import { DataTypes } from "sequelize";
+import bcrypt from 'bcrypt';
+import { DataTypes } from 'sequelize';
 
 export default (sequelize) => {
   const User = sequelize.define(
-    "User",
+    'User',
     {
       name: {
         type: DataTypes.STRING,
@@ -11,7 +11,7 @@ export default (sequelize) => {
         validate: {
           len: {
             args: [2, 30],
-            msg: "Name must be between 2 and 30 characters",
+            msg: 'Name must be between 2 and 30 characters',
           },
         },
       },
@@ -21,7 +21,7 @@ export default (sequelize) => {
         unique: true,
         validate: {
           isEmail: {
-            msg: "Email must be a valid email address",
+            msg: 'Email must be a valid email address',
           },
         },
       },
@@ -31,7 +31,7 @@ export default (sequelize) => {
         validate: {
           len: {
             args: [8, 50],
-            msg: "Password must be between 8 and 50 characters",
+            msg: 'Password must be between 8 and 50 characters',
           },
         },
       },
@@ -43,11 +43,11 @@ export default (sequelize) => {
     },
     {
       defaultScope: {
-        attributes: { exclude: ["password"] },
+        attributes: { exclude: ['password'] },
       },
       scopes: {
         withPassword: {
-          attributes: { include: ["password"] },
+          attributes: { include: ['password'] },
         },
       },
       hooks: {
@@ -59,7 +59,7 @@ export default (sequelize) => {
           if (user.email) user.email = user.email.toLowerCase();
         },
         beforeUpdate: async (user) => {
-          if (user.password && user.changed("password")) {
+          if (user.password && user.changed('password')) {
             const salt = await bcrypt.genSalt(10);
             user.password = await bcrypt.hash(user.password, salt);
           }
@@ -72,7 +72,7 @@ export default (sequelize) => {
           if (where?.email) where.email = where.email.toLowerCase();
         },
       },
-    }
+    },
   );
 
   return User;

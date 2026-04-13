@@ -1,4 +1,4 @@
-import { sequelize, User, Event } from './db.js';
+import { Event, sequelize, User } from './db.js';
 
 const seedDB = async () => {
   const force = process.env.SEED_FORCE === 'true' || process.env.SEED_FORCE === '1';
@@ -8,7 +8,7 @@ const seedDB = async () => {
     const userCount = await User.count();
     if (userCount > 0) {
       console.log(
-        'Database already seeded (users exist). Skipping. Use SEED_FORCE=true to reset and re-seed.'
+        'Database already seeded (users exist). Skipping. Use SEED_FORCE=true to reset and re-seed.',
       );
       return false;
     }
@@ -18,18 +18,18 @@ const seedDB = async () => {
     {
       name: 'Alice Johnson',
       email: 'alice@example.com',
-      password: '12345678'
+      password: '12345678',
     },
     {
       name: 'Bob Smith',
       email: 'bob@example.com',
-      password: '12345678'
+      password: '12345678',
     },
     {
       name: 'Jane Doe',
       email: 'Jae@example.com',
-      password: '12345678'
-    }
+      password: '12345678',
+    },
   ];
 
   const events = [
@@ -40,7 +40,7 @@ const seedDB = async () => {
       location: 'Central Park',
       latitude: 40.785091,
       longitude: -73.968285,
-      organizerId: 1
+      organizerId: 1,
     },
     {
       title: 'Tech Conference',
@@ -49,7 +49,7 @@ const seedDB = async () => {
       location: 'Convention Center',
       latitude: 37.774929,
       longitude: -122.419418,
-      organizerId: 2
+      organizerId: 2,
     },
     {
       title: 'Oktoberfest',
@@ -58,7 +58,7 @@ const seedDB = async () => {
       location: 'Theresienwiese, Munich',
       latitude: 48.131271,
       longitude: 11.549669,
-      organizerId: 1
+      organizerId: 1,
     },
     {
       title: 'Berlin Marathon',
@@ -67,7 +67,7 @@ const seedDB = async () => {
       location: 'Brandenburg Gate, Berlin',
       latitude: 52.516275,
       longitude: 13.377704,
-      organizerId: 3
+      organizerId: 3,
     },
     {
       title: 'Christmas Market',
@@ -76,8 +76,8 @@ const seedDB = async () => {
       location: 'Alexanderplatz, Berlin',
       latitude: 52.521918,
       longitude: 13.413215,
-      organizerId: 3
-    }
+      organizerId: 3,
+    },
   ];
 
   await User.bulkCreate(users, { individualHooks: true });

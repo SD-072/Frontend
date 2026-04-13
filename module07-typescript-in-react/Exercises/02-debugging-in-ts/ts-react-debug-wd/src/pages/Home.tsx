@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { FaCalendarAlt, FaMapMarkerAlt, FaShare, FaUsers } from 'react-icons/fa';
 import { Link } from 'react-router';
 import { getHomePageData } from '@/data';
-import { FaCalendarAlt, FaUsers, FaMapMarkerAlt, FaShare } from 'react-icons/fa';
 
 const Home = () => {
   const [count, setCount] = useState({
@@ -96,7 +96,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className='py-20 bg-gradient-to-r from-primary to-secondary'>
+      <section className='py-20 bg-linear-to-r from-primary to-secondary'>
         <div className='container mx-auto px-4'>
           <div className='stats stats-vertical lg:stats-horizontal shadow-xl bg-base-100 w-full'>
             <div className='stat'>
@@ -192,7 +192,7 @@ const Home = () => {
         </div>
       </section>
       <section
-        className='py-20 bg-gradient-to-r from-primary to-secondary relative overflow-hidden'
+        className='py-20 bg-linear-to-r from-primary to-secondary relative overflow-hidden'
         style={{
           backgroundImage:
             'linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)',

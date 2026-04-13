@@ -1,14 +1,14 @@
-import { DataTypes } from "sequelize";
+import { DataTypes } from 'sequelize';
 
 export default (sequelize) => {
-  const Event = sequelize.define("Event", {
+  const Event = sequelize.define('Event', {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: {
           args: [3, 255],
-          msg: "Title must be between 8 and 50 characters",
+          msg: 'Title must be between 8 and 50 characters',
         },
       },
     },
@@ -17,7 +17,7 @@ export default (sequelize) => {
       validate: {
         len: {
           args: [0, 255],
-          msg: "Title must be a maximum of 5000 characters",
+          msg: 'Title must be a maximum of 5000 characters',
         },
       },
     },
@@ -31,7 +31,7 @@ export default (sequelize) => {
       validate: {
         len: {
           args: [0, 255],
-          msg: "Title must be a maximum of 5000 characters",
+          msg: 'Title must be a maximum of 5000 characters',
         },
       },
     },
@@ -41,11 +41,11 @@ export default (sequelize) => {
       validate: {
         min: {
           args: -90,
-          msg: "Latitude must be between -90 and 90",
+          msg: 'Latitude must be between -90 and 90',
         },
         max: {
           args: 90,
-          msg: "Latitude must be between -90 and 90",
+          msg: 'Latitude must be between -90 and 90',
         },
       },
     },
@@ -55,11 +55,11 @@ export default (sequelize) => {
       validate: {
         min: {
           args: -180,
-          msg: "Longitude must be between -180 and 180",
+          msg: 'Longitude must be between -180 and 180',
         },
         max: {
           args: 180,
-          msg: "Longitude must be between -180 and 180",
+          msg: 'Longitude must be between -180 and 180',
         },
       },
     },
@@ -67,8 +67,8 @@ export default (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "Users",
-        key: "id",
+        model: 'Users',
+        key: 'id',
       },
     },
   });

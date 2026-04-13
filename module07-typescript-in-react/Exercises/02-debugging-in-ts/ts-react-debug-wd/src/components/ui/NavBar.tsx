@@ -1,5 +1,5 @@
-import { Link } from 'react-router';
 import { IoLocationSharp } from 'react-icons/io5';
+import { Link } from 'react-router';
 import { useAuth } from '@/contexts';
 import { menuList } from '@/utils';
 
@@ -16,6 +16,7 @@ const NavBar = () => {
             viewBox='0 0 24 24'
             className='inline-block h-6 w-6 stroke-current'
           >
+            <title>Open navigation menu</title>
             <path
               strokeLinecap='round'
               strokeLinejoin='round'
@@ -49,8 +50,10 @@ const NavBar = () => {
               </li>
             ))}
           {isAuthenticated && (
-            <li onClick={logout}>
-              <span>Log out</span>
+            <li>
+              <button type='button' onClick={logout}>
+                Log out
+              </button>
             </li>
           )}
         </ul>

@@ -1,7 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router';
-import { MainLayout, ProtectedLayout } from '@/layouts';
-import { Events, Home, NotFound, Login, Register, CreateEvent } from '@/pages';
+import { BrowserRouter, Route, Routes } from 'react-router';
 import { ErrorBoundary, Loading } from '@/components';
+import { MainLayout, ProtectedLayout } from '@/layouts';
+import { CreateEvent, Events, Home, Login, NotFound, Register } from '@/pages';
 
 const App = () => {
   return (

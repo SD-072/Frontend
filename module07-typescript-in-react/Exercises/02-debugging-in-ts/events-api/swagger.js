@@ -1,34 +1,34 @@
-import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 
 const swaggerDefinition = {
   openapi: '3.0.1',
   info: {
     title: 'Events API',
     description: 'API documentation for the Upcoming Events application',
-    version: '1.0.0'
-  }
+    version: '1.0.0',
+  },
 };
 
-const generateSwaggerPaths = modelName => ({
+const generateSwaggerPaths = (modelName) => ({
   [`/api/${modelName}`]: {
     post: {
       summary: `Create a new ${modelName}`,
       tags: [modelName],
       security: [
         {
-          bearerAuth: []
-        }
+          bearerAuth: [],
+        },
       ],
       requestBody: {
         required: true,
         content: {
           'application/json': {
             schema: {
-              $ref: `#/components/requests/${modelName}`
-            }
-          }
-        }
+              $ref: `#/components/requests/${modelName}`,
+            },
+          },
+        },
       },
       responses: {
         201: {
@@ -36,15 +36,15 @@ const generateSwaggerPaths = modelName => ({
           content: {
             'application/json': {
               schema: {
-                $ref: `#/components/responses/${modelName}`
-              }
-            }
-          }
+                $ref: `#/components/responses/${modelName}`,
+              },
+            },
+          },
         },
         400: {
-          description: `Bad Request, Validation Error`
-        }
-      }
+          description: `Bad Request, Validation Error`,
+        },
+      },
     },
     get: {
       summary: `Get all ${modelName}`,
@@ -57,9 +57,9 @@ const generateSwaggerPaths = modelName => ({
           schema: {
             type: 'integer',
             minimum: 1,
-            default: 1
+            default: 1,
           },
-          description: 'The page number to retrieve.'
+          description: 'The page number to retrieve.',
         },
         {
           in: 'query',
@@ -68,10 +68,10 @@ const generateSwaggerPaths = modelName => ({
           schema: {
             type: 'integer',
             minimum: 1,
-            default: 10
+            default: 10,
           },
-          description: 'The number of items per page.'
-        }
+          description: 'The number of items per page.',
+        },
       ],
       responses: {
         200: {
@@ -84,41 +84,41 @@ const generateSwaggerPaths = modelName => ({
                   totalCount: {
                     type: 'integer',
                     description: 'Total number of items',
-                    example: 1
+                    example: 1,
                   },
                   totalPages: {
                     type: 'integer',
                     description: 'Total number of pages',
-                    example: 1
+                    example: 1,
                   },
                   currentPage: {
                     type: 'integer',
                     description: 'Current page number',
-                    example: 1
+                    example: 1,
                   },
                   hasNextPage: {
                     type: 'boolean',
                     description: 'Indicates if there are more pages after the current page',
-                    example: false
+                    example: false,
                   },
                   hasPreviousPage: {
                     type: 'boolean',
                     description: 'Indicates if there are more pages before the current page',
-                    example: false
+                    example: false,
                   },
                   results: {
                     type: 'array',
                     items: {
-                      $ref: `#/components/responses/${modelName}`
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+                      $ref: `#/components/responses/${modelName}`,
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   },
   [`/api/${modelName}/{id}`]: {
     get: {
@@ -130,9 +130,9 @@ const generateSwaggerPaths = modelName => ({
           name: 'id',
           required: true,
           schema: {
-            type: 'string'
-          }
-        }
+            type: 'string',
+          },
+        },
       ],
       responses: {
         200: {
@@ -140,20 +140,20 @@ const generateSwaggerPaths = modelName => ({
           content: {
             'application/json': {
               schema: {
-                $ref: `#/components/responses/${modelName}`
-              }
-            }
-          }
-        }
-      }
+                $ref: `#/components/responses/${modelName}`,
+              },
+            },
+          },
+        },
+      },
     },
     put: {
       summary: `Update ${modelName} by ID`,
       tags: [modelName],
       security: [
         {
-          bearerAuth: []
-        }
+          bearerAuth: [],
+        },
       ],
       parameters: [
         {
@@ -161,19 +161,19 @@ const generateSwaggerPaths = modelName => ({
           name: 'id',
           required: true,
           schema: {
-            type: 'string'
-          }
-        }
+            type: 'string',
+          },
+        },
       ],
       requestBody: {
         required: true,
         content: {
           'application/json': {
             schema: {
-              $ref: `#/components/requests/${modelName}`
-            }
-          }
-        }
+              $ref: `#/components/requests/${modelName}`,
+            },
+          },
+        },
       },
       responses: {
         200: {
@@ -181,10 +181,10 @@ const generateSwaggerPaths = modelName => ({
           content: {
             'application/json': {
               schema: {
-                $ref: `#/components/responses/${modelName}`
-              }
-            }
-          }
+                $ref: `#/components/responses/${modelName}`,
+              },
+            },
+          },
         },
         404: {
           description: `${modelName} not found`,
@@ -195,12 +195,12 @@ const generateSwaggerPaths = modelName => ({
                 properties: {
                   error: {
                     type: 'string',
-                    example: 'Record not found'
-                  }
-                }
-              }
-            }
-          }
+                    example: 'Record not found',
+                  },
+                },
+              },
+            },
+          },
         },
         400: {
           description: `Bad Request, Validation Error`,
@@ -211,22 +211,22 @@ const generateSwaggerPaths = modelName => ({
                 properties: {
                   error: {
                     type: 'string',
-                    example: 'ValidationError: "keyName" length must be at least x characters long'
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+                    example: 'ValidationError: "keyName" length must be at least x characters long',
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
     },
     delete: {
       summary: `Delete ${modelName} by ID`,
       tags: [modelName],
       security: [
         {
-          bearerAuth: []
-        }
+          bearerAuth: [],
+        },
       ],
       parameters: [
         {
@@ -234,16 +234,16 @@ const generateSwaggerPaths = modelName => ({
           name: 'id',
           required: true,
           schema: {
-            type: 'string'
-          }
-        }
+            type: 'string',
+          },
+        },
       ],
       responses: {
         204: {
-          description: `${modelName} deleted`
+          description: `${modelName} deleted`,
         },
         404: {
-          description: `${modelName} not found`
+          description: `${modelName} not found`,
         },
         500: {
           description: `FOREIGN KEY constraint failed (must delete related records first)`,
@@ -254,26 +254,26 @@ const generateSwaggerPaths = modelName => ({
                 properties: {
                   error: {
                     type: 'string',
-                    example: 'SQLITE_CONSTRAINT: FOREIGN KEY constraint failed'
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+                    example: 'SQLITE_CONSTRAINT: FOREIGN KEY constraint failed',
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
 });
 
-const options = port => ({
+const options = (port) => ({
   swaggerDefinition: {
     ...swaggerDefinition,
     servers: [
       {
         url: `http://localhost:${port}`,
-        description: 'Local server'
-      }
+        description: 'Local server',
+      },
     ],
     paths: {
       ...generateSwaggerPaths('users'),
@@ -290,14 +290,14 @@ const options = port => ({
                   schema: {
                     type: 'array',
                     items: {
-                      $ref: `#/components/schemas/events`
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+                      $ref: `#/components/schemas/events`,
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
       },
       '/api/users': {
         post: {
@@ -313,18 +313,18 @@ const options = port => ({
                     email: {
                       type: 'string',
                       format: 'email',
-                      example: 'user@example.com'
+                      example: 'user@example.com',
                     },
                     password: {
                       type: 'string',
                       format: 'password',
-                      example: 'password123'
-                    }
+                      example: 'password123',
+                    },
                   },
-                  required: ['email', 'password']
-                }
-              }
-            }
+                  required: ['email', 'password'],
+                },
+              },
+            },
           },
           responses: {
             200: {
@@ -332,10 +332,10 @@ const options = port => ({
               content: {
                 'application/json': {
                   schema: {
-                    $ref: `#/components/responses/users`
-                  }
-                }
-              }
+                    $ref: `#/components/responses/users`,
+                  },
+                },
+              },
             },
             409: {
               description: 'Conflict. User Already Exists',
@@ -346,12 +346,12 @@ const options = port => ({
                     properties: {
                       error: {
                         type: 'string',
-                        example: 'User Already Exist'
-                      }
-                    }
-                  }
-                }
-              }
+                        example: 'User Already Exist',
+                      },
+                    },
+                  },
+                },
+              },
             },
             400: {
               description: `Bad Request, Validation Error`,
@@ -363,14 +363,14 @@ const options = port => ({
                       error: {
                         type: 'string',
                         example:
-                          'ValidationError: "password" length must be at least 8 characters long'
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+                          'ValidationError: "password" length must be at least 8 characters long',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
         },
         get: {
           summary: `Get all users`,
@@ -383,9 +383,9 @@ const options = port => ({
               schema: {
                 type: 'integer',
                 minimum: 1,
-                default: 1
+                default: 1,
               },
-              description: 'The page number to retrieve.'
+              description: 'The page number to retrieve.',
             },
             {
               in: 'query',
@@ -394,10 +394,10 @@ const options = port => ({
               schema: {
                 type: 'integer',
                 minimum: 1,
-                default: 10
+                default: 10,
               },
-              description: 'The number of items per page.'
-            }
+              description: 'The number of items per page.',
+            },
           ],
           responses: {
             200: {
@@ -410,41 +410,41 @@ const options = port => ({
                       totalCount: {
                         type: 'integer',
                         description: 'Total number of items',
-                        example: 1
+                        example: 1,
                       },
                       totalPages: {
                         type: 'integer',
                         description: 'Total number of pages',
-                        example: 1
+                        example: 1,
                       },
                       currentPage: {
                         type: 'integer',
                         description: 'Current page number',
-                        example: 1
+                        example: 1,
                       },
                       hasNextPage: {
                         type: 'boolean',
                         description: 'Indicates if there are more pages after the current page',
-                        example: false
+                        example: false,
                       },
                       hasPreviousPage: {
                         type: 'boolean',
                         description: 'Indicates if there are more pages before the current page',
-                        example: false
+                        example: false,
                       },
                       results: {
                         type: 'array',
                         items: {
-                          $ref: `#/components/responses/users`
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+                          $ref: `#/components/responses/users`,
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
       },
       '/api/auth/login': {
         post: {
@@ -460,18 +460,18 @@ const options = port => ({
                     email: {
                       type: 'string',
                       format: 'email',
-                      example: 'user@example.com'
+                      example: 'user@example.com',
                     },
                     password: {
                       type: 'string',
                       format: 'password',
-                      example: 'password123'
-                    }
+                      example: 'password123',
+                    },
                   },
-                  required: ['email', 'password']
-                }
-              }
-            }
+                  required: ['email', 'password'],
+                },
+              },
+            },
           },
           responses: {
             200: {
@@ -484,7 +484,7 @@ const options = port => ({
                       token: {
                         type: 'string',
                         description: 'JWT token',
-                        example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+                        example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
                       },
                       user: {
                         type: 'object',
@@ -492,19 +492,19 @@ const options = port => ({
                         properties: {
                           id: {
                             type: 'integer',
-                            example: '1'
+                            example: '1',
                           },
                           email: {
                             type: 'string',
                             format: 'email',
-                            example: 'user@example.com'
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
+                            example: 'user@example.com',
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
             },
             403: {
               description: 'Forbidden. Invalid email or password',
@@ -515,12 +515,12 @@ const options = port => ({
                     properties: {
                       error: {
                         type: 'string',
-                        example: 'Invalid email or password.'
-                      }
-                    }
-                  }
-                }
-              }
+                        example: 'Invalid email or password.',
+                      },
+                    },
+                  },
+                },
+              },
             },
             400: {
               description: `Bad Request, Validation Error`,
@@ -532,15 +532,15 @@ const options = port => ({
                       error: {
                         type: 'string',
                         example:
-                          'ValidationError: "password" length must be at least 8 characters long'
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+                          'ValidationError: "password" length must be at least 8 characters long',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
       },
       '/api/auth/profile': {
         get: {
@@ -548,17 +548,17 @@ const options = port => ({
           tags: ['auth'],
           security: [
             {
-              bearerAuth: []
-            }
+              bearerAuth: [],
+            },
           ],
           responses: {
             200: {
               description: "Logged-in user's profile",
               content: {
                 'application/json': {
-                  schema: { $ref: `#/components/responses/users` }
-                }
-              }
+                  schema: { $ref: `#/components/responses/users` },
+                },
+              },
             },
             403: {
               description: 'Unauthorized. Invalid or missing token.',
@@ -569,24 +569,24 @@ const options = port => ({
                     properties: {
                       message: {
                         type: 'string',
-                        example: 'Forbidden'
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+                        example: 'Forbidden',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
     },
     components: {
       securitySchemes: {
         bearerAuth: {
           type: 'http',
           scheme: 'bearer',
-          bearerFormat: 'JWT'
-        }
+          bearerFormat: 'JWT',
+        },
       },
       schemas: {
         users: {
@@ -598,9 +598,9 @@ const options = port => ({
             password: { type: 'string', format: 'password' },
             isActive: { type: 'boolean' },
             createdAt: { type: 'string', format: 'date-time' },
-            updatedAt: { type: 'string', format: 'date-time' }
+            updatedAt: { type: 'string', format: 'date-time' },
           },
-          required: ['email', 'password']
+          required: ['email', 'password'],
         },
         events: {
           type: 'object',
@@ -614,10 +614,10 @@ const options = port => ({
             longitude: { type: 'number', format: 'string' },
             organizerId: { type: 'number', format: 'integers' },
             createdAt: { type: 'string', format: 'date-time' },
-            updatedAt: { type: 'string', format: 'date-time' }
+            updatedAt: { type: 'string', format: 'date-time' },
           },
-          required: ['title', 'date', 'location', 'organizerId']
-        }
+          required: ['title', 'date', 'location', 'organizerId'],
+        },
       },
       requests: {
         users: {
@@ -627,15 +627,15 @@ const options = port => ({
             email: {
               type: 'string',
               format: 'email',
-              example: 'John@example.com'
+              example: 'John@example.com',
             },
             password: {
               type: 'string',
               format: 'password',
-              example: '12345678'
+              example: '12345678',
             },
-            isActive: { type: 'boolean' }
-          }
+            isActive: { type: 'boolean' },
+          },
         },
         events: {
           type: 'object',
@@ -643,25 +643,25 @@ const options = port => ({
             title: { type: 'string', example: 'Event Title' },
             description: {
               type: 'string',
-              example: 'Some Description for the Event'
+              example: 'Some Description for the Event',
             },
             date: { type: 'string', format: 'date-time' },
             location: {
               type: 'string',
-              example: 'Schloßbezirk 10, 76131 Karlsruhe'
+              example: 'Schloßbezirk 10, 76131 Karlsruhe',
             },
             latitude: {
               type: 'number',
               format: 'float',
-              example: '8.404746955649602'
+              example: '8.404746955649602',
             },
             longitude: {
               type: 'number',
               format: 'float',
-              example: '49.01438194665317'
-            }
-          }
-        }
+              example: '49.01438194665317',
+            },
+          },
+        },
       },
       responses: {
         users: {
@@ -672,12 +672,12 @@ const options = port => ({
             email: {
               type: 'string',
               format: 'email',
-              example: 'John@example.com'
+              example: 'John@example.com',
             },
             isActive: { type: 'boolean' },
             createdAt: { type: 'string', format: 'date-time' },
-            updatedAt: { type: 'string', format: 'date-time' }
-          }
+            updatedAt: { type: 'string', format: 'date-time' },
+          },
         },
         events: {
           type: 'object',
@@ -686,32 +686,32 @@ const options = port => ({
             title: { type: 'string', example: 'Event Title' },
             description: {
               type: 'string',
-              example: 'Some Description for the Event'
+              example: 'Some Description for the Event',
             },
             date: { type: 'string', format: 'date-time' },
             location: {
               type: 'string',
-              example: 'Schloßbezirk 10, 76131 Karlsruhe'
+              example: 'Schloßbezirk 10, 76131 Karlsruhe',
             },
             latitude: {
               type: 'number',
               format: 'float',
-              example: '8.404746955649602'
+              example: '8.404746955649602',
             },
             longitude: {
               type: 'number',
               format: 'float',
-              example: '49.01438194665317'
+              example: '49.01438194665317',
             },
             organizerId: { type: 'integer', example: 1 },
             createdAt: { type: 'string', format: 'date-time' },
-            updatedAt: { type: 'string', format: 'date-time' }
-          }
-        }
-      }
-    }
+            updatedAt: { type: 'string', format: 'date-time' },
+          },
+        },
+      },
+    },
   },
-  apis: []
+  apis: [],
 });
 
 export const setupSwagger = (app, port) => {

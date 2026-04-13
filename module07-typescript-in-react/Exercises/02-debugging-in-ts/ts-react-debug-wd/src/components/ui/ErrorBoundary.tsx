@@ -18,8 +18,8 @@ const ErrorBoundary = () => {
         {isResponseError
           ? error.data
           : error instanceof Error
-          ? error.message
-          : 'Something went very wrong'}
+            ? error.message
+            : 'Something went very wrong'}
         &nbsp;
         <span role='img' aria-labelledby='crying face'>
           😢

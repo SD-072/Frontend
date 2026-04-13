@@ -1,12 +1,12 @@
-import { asyncWrapper } from "../utils/asyncWrapper.js";
-import { ErrorResponse } from "../utils/ErrorResponse.js";
+import { asyncWrapper } from '../utils/asyncWrapper.js';
+import { ErrorResponse } from '../utils/ErrorResponse.js';
 
-export const findAll = asyncWrapper(async (req, res, next) => {
+export const findAll = asyncWrapper(async (req, res, _next) => {
   const { page, limit, offset } = res.pagination;
   const records = await req.model.findAndCountAll({
     offset,
     limit,
-    order: [["createdAt", "DESC"]],
+    order: [['createdAt', 'DESC']],
   });
 
   const totalCount = records.count;
@@ -23,7 +23,7 @@ export const findAll = asyncWrapper(async (req, res, next) => {
   res.json({ ...paginationData, results: records.rows });
 });
 
-export const findOneById = asyncWrapper(async (req, res, next) => {
+export const findOneById = asyncWrapper(async (req, res, _next) => {
   const {
     params: { id },
   } = req;
@@ -31,13 +31,13 @@ export const findOneById = asyncWrapper(async (req, res, next) => {
   res.json(record);
 });
 
-export const createOne = asyncWrapper(async (req, res, next) => {
+export const createOne = asyncWrapper(async (req, res, _next) => {
   const { body } = req;
   const record = await req.model.create(body);
   res.status(201).json(record);
 });
 
-export const updateOne = asyncWrapper(async (req, res, next) => {
+export const updateOne = asyncWrapper(async (req, res, _next) => {
   const {
     params: { id },
     body,
@@ -45,8 +45,7 @@ export const updateOne = asyncWrapper(async (req, res, next) => {
 
   const hooks = req.model.options?.hooks || {};
   const hasUpdateHooks =
-    (hooks.beforeUpdate?.length ?? 0) > 0 ||
-    (hooks.afterUpdate?.length ?? 0) > 0;
+    (hooks.beforeUpdate?.length ?? 0) > 0 || (hooks.afterUpdate?.length ?? 0) > 0;
 
   const [updated] = await req.model.update(body, {
     where: { id },
@@ -54,13 +53,13 @@ export const updateOne = asyncWrapper(async (req, res, next) => {
   });
 
   if (!updated) {
-    throw new ErrorResponse("Record not found", 404);
+    throw new ErrorResponse('Record not found', 404);
   }
   const updatedRecord = await req.model.findByPk(id);
   res.json(updatedRecord);
 });
 
-export const deleteOne = asyncWrapper(async (req, res, next) => {
+export const deleteOne = asyncWrapper(async (req, res, _next) => {
   const {
     params: { id },
   } = req;
@@ -69,7 +68,7 @@ export const deleteOne = asyncWrapper(async (req, res, next) => {
   });
 
   if (!deleted) {
-    throw new ErrorResponse("Record not found", 404);
+    throw new ErrorResponse('Record not found', 404);
   }
   res.status(204).end();
 });
